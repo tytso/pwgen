@@ -11,9 +11,12 @@ INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 
+WALL_OPTS = -Wall -Wnested-externs -Wstrict-prototypes -Wmissing-prototypes \
+	-Wshadow -Wwrite-strings -Wpointer-arith -Wcast-qual -Wcast-align \
+	-Wtraditional
 CC = @CC@
 DEFS = @DEFS@
-CFLAGS = @CFLAGS@
+CFLAGS = @CFLAGS@ $(WALL_OPTS)
 CPPFLAGS = @CPPFLAGS@
 ALL_CFLAGS = $(CPPFLAGS) $(DEFS) $(USE_WFLAGS) $(CFLAGS) $(XTRA_CFLAGS) 
 LDFLAGS = @LDFLAGS@

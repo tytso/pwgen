@@ -8,8 +8,8 @@
  */
 
 struct pw_element {
-	char	*str;
-	int	flags;
+	const char	*str;
+	int		flags;
 };
 
 /*
@@ -27,9 +27,9 @@ struct pw_element {
 #define PW_ONE_CASE	0x0002
 
 struct pwgen_func {
-	char	*name;
-	void	(*func)(char *buf, int size, int pw_flags);
-	int	flags;
+	const char	*name;
+	void		(*func)(char *buf, int size, int pw_flags);
+	int		flags;
 };
 
 /* Function prototypes */

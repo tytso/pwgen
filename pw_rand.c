@@ -8,6 +8,7 @@
  * License.
  */
 
+#include <string.h>
 #include "pwgen.h"
 
 #define FIRST_CHAR '!'

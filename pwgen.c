@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #ifdef HAVE_GETOPT_H
 #include <getopt.h>
 #endif
@@ -61,10 +63,9 @@ const char *usage_msg =
 "  -1\n\tDon't print the generated passwords in columns\n"
 ;	
 	
-void usage(void)
+static void usage(void)
 {
 	fprintf(stderr, usage_msg);
-	
 	exit(1);
 }
 
@@ -75,7 +76,7 @@ int main(int argc, char **argv)
 	int	c, i;
 	int	num_cols = -1;
 	char	*buf, *tmp;
-	void	(*pwgen)(char *buf, int size, int pw_flags);
+	void	(*pwgen)(char *inbuf, int size, int pw_flags);
 
 	pwgen = pw_phonemes;
 	if (isatty(1)) {

@@ -1,5 +1,15 @@
 2002-07-15  Theodore Ts'o  <tytso@mit.edu>
 
+	* Makefile.in (WALL_OPTS): Add gcc options to do lots of nit-picky
+		checking.
+
+	* pwgen.c, pw_phonemes.c, pw_rand.c, pwgen.c, pwgen.h, randnum.c:
+		Add const declarations and other code cleanups for
+		avoidining -Wall warnings.
+
+	* pwgen.c, pw_rand.c: #include the appropriate header files to
+		avoid -Wall warnings.  (Addresses Debian bug #126774).
+
 	* pwgen.c (main): Fix floating point exception errors if the
 		password is longer than terminal width.  Addresses Debian
 		bug #113571.
