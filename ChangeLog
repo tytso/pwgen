@@ -1,3 +1,7 @@
+2002-07-16  Theodore Ts'o  <tytso@mit.edu>
+
+	* pw_phonemes.c: Add missing #include of string.h
+
 2002-07-15  Theodore Ts'o  <tytso@mit.edu>
 
 	* Release of pwgen 2.02

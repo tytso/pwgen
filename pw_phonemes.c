@@ -8,6 +8,7 @@
  */
 
 #include <ctype.h>
+#include <string.h>
 #include "pwgen.h"
 
 struct pw_element elements[] = {
