@@ -4,6 +4,9 @@
 		password is longer than terminal width.  Addresses Debian
 		bug #113571.
 
+	* pwgen.c (main): Return an exit value of 0 when pwgen on
+		success.  (Addresses Debian bugs #118181 and #102063).
+
 2001-06-19  Theodore Tso  <tytso@valinux.com>
 
 	* Release of pwgen 2.01

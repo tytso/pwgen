@@ -167,4 +167,5 @@ int main(int argc, char **argv)
 	if ((num_cols > 1) && ((i % num_cols) != 0))
 		fputc('\n', stdout);
 	free(buf);
+	return 0;
 }
