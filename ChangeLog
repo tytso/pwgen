@@ -1,5 +1,7 @@
 2003-01-15  Theodore Ts'o  <tytso@mit.edu>
 
+	* Makefile.in (pwgen): Use LDFLAGS when linking pwgen.
+
 	* pw_phonemes.c (pw_phonemes): Fix bug in how we call 
 		pw_random_number() so that we generate passwords that
 		start with vowels, and insert numbers from 0-9, not just

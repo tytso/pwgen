@@ -37,7 +37,7 @@ SRCS= pwgen.c pw_phonemes.c pw_rand.c randnum.c
 
 
 pwgen: $(OBJS)
-	$(CC) -o pwgen $(OBJS)
+	$(CC) $(LDFLAGS) -o pwgen $(OBJS)
 
 install: pwgen pwgen.1
 	mkdir -p $(DESTDIR)$(prefix)/bin $(DESTDIR)$(mandir)/man1
