@@ -1,5 +1,15 @@
 2002-07-15  Theodore Ts'o  <tytso@mit.edu>
 
+	* pwgen.c (main): If the number of characters is less than 5,
+		force the use of the fully random generator, since the
+		quality of phonetic generator is really bad if the lengths
+		are small --- and if the length is less than or equal to
+		2, pwgen will loop forever.  (Addresses Debian bug #117137)
+
+	* pw_rand.c: Add most punctuation characters to the "bad
+		characters list", so that the random passwords are much
+		more usable.
+
 	* pwgen.1: Fix e-mail address in man page.  (Addresses Debian bug
 		#150579)
 

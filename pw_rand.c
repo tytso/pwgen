@@ -14,7 +14,7 @@
 #define FIRST_CHAR '!'
 #define LAST_CHAR '~'
 
-static char bad_chars[] = "'\\\"";
+static char bad_chars[] = "'\\\"!@#$%^&*()+=_-{}[]<>`~?:;,/.|";
 
 void pw_rand(char *buf, int size, int pw_flags)
 {
