@@ -56,9 +56,16 @@ struct pw_element elements[] = {
 
 void pw_phonemes(char *buf, int size, int pw_flags)
 {
-	int	c = 0, i, len, flags;
-	int	prev = 0, should_be = 0, first = 1;
+	int	c, i, len, flags, feature_flags;
+	int	prev, should_be, first;
 	char	*str;
+
+try_again:
+	feature_flags = pw_flags;
+	c = 0;
+	prev = 0;
+	should_be = 0;
+	first = 1;
 
 	should_be = pw_random_number(1) ? VOWEL : CONSONANT;
 	
@@ -87,11 +94,11 @@ void pw_phonemes(char *buf, int size, int pw_flags)
 		strcpy(buf+c, str);
 
 		/* Handle PW_ONE_CASE */
-		if (pw_flags & PW_ONE_CASE) {
+		if (feature_flags & PW_ONE_CASE) {
 			if ((first || flags & CONSONANT) &&
 			    (pw_random_number(10) < 3)) {
 				buf[c] = toupper(buf[c]);
-				pw_flags &= ~PW_ONE_CASE;
+				feature_flags &= ~PW_ONE_CASE;
 			}
 		}
 		
@@ -104,11 +111,11 @@ void pw_phonemes(char *buf, int size, int pw_flags)
 		/*
 		 * Handle PW_ONE_NUMBER
 		 */
-		if (pw_flags & PW_ONE_NUMBER) {
+		if (feature_flags & PW_ONE_NUMBER) {
 			if (!first && (pw_random_number(10) < 3)) {
 				buf[c++] = pw_random_number(9)+'0';
 				buf[c] = 0;
-				pw_flags &= ~PW_ONE_NUMBER;
+				feature_flags &= ~PW_ONE_NUMBER;
 				
 				first = 1;
 				prev = 0;
@@ -134,4 +141,6 @@ void pw_phonemes(char *buf, int size, int pw_flags)
 		prev = flags;
 		first = 0;
 	}
+	if (feature_flags & (PW_ONE_CASE | PW_ONE_NUMBER))
+		goto try_again;
 }
