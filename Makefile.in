@@ -1,3 +1,5 @@
+PWGEN_VERSION=2.0
+
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
@@ -19,6 +21,7 @@ RM = @RM@
 MV = @MV@
 SED = @SED@
 PERL = @PERL@
+TAR = tar
 
 all:: pwgen
 
@@ -36,11 +39,41 @@ pwgen: $(OBJS)
 install: pwgen pwgen.1
 	mkdir -p $(DESTDIR)$(prefix)/bin $(DESTDIR)$(prefix)/man/man1
 	$(INSTALL_PROGRAM) pwgen $(DESTDIR)$(prefix)/bin/pwgen
-	$(INSTALL_DATA) pwgen.1 $(DESTDIR)$(mandir)/man1/pwgen.1
+	$(INSTALL_DATA) $(srcdir)/pwgen.1 $(DESTDIR)$(mandir)/man1/pwgen.1
 	
 clean:
-	$(RM) $(OBJS) pwgen *~
+	$(RM) -f $(OBJS) pwgen *~
 
+distclean:
+	$(RM) -f config.status config.log config.cache Makefile \
+		$(srcdir)/Makefile.in.old $(srcdir)/.exclude-file
+
+
+#
+# Build source tar ball...
+#
+
+SRCROOT = pwgen-$(PWGEN_VERSION)
+
+$(srcdir)/.exclude-file:
+	a=$(SRCROOT); \
+	(cd $(srcdir)/.. && find src \( -name \*~ -o -name \*.orig \
+		-o -name CVS -o -name \*.rej \
+		-o -name TAGS -o -name \*.old -o -name \*.gmo \
+		-o -name changed-files -o -name .#\* \) \
+		-print) | sed -e "s/src/$$a/" > $(srcdir)/.exclude-file
+	echo "$(SRCROOT)/build" >> $(srcdir)/.exclude-file
+	echo "$(SRCROOT)/rpm.log" >> $(srcdir)/.exclude-file
+	echo "$(SRCROOT)/TODO" >> $(srcdir)/.exclude-file
+	echo "$(SRCROOT)/.exclude-file" >> $(srcdir)/.exclude-file
+		>> $(srcdir)/.exclude-file
+
+source_tar_file: $(srcdir)/.exclude-file
+	cd $(srcdir)/.. && a=$(SRCROOT); rm -f $$a ; ln -sf src $$a ; \
+		$(TAR) -c -h -v -f - \
+			-X $$a/.exclude-file $$a | \
+		gzip -9 > pwgen-$(PWGEN_VERSION).tar.gz
+	rm -f $(srcdir)/.exclude-file
 #
 # Autoconf magic...
 #
