@@ -1,5 +1,11 @@
 2003-01-15  Theodore Ts'o  <tytso@mit.edu>
 
+	* randnum.c: Fix #ifdef to use HAVE_DRAND48 instead of just
+		RAND48.  This caused random() to be callled without first
+		initializing the right random number generator.  This
+		apparently caused pwgen to core dump under AIX, which
+		seems surprising.
+
 	* pw_rand.c (pw_rand): Use a list of acceptable characters instead
 		of a list of unacceptable characters.  This is slightly
 		faster, and the code is cleaner and easier to understand.
