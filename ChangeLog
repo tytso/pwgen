@@ -1,5 +1,7 @@
 2003-01-15  Theodore Ts'o  <tytso@mit.edu>
 
+	* Release of pwgen 2.03
+
 	* randnum.c: Fix #ifdef to use HAVE_DRAND48 instead of just
 		RAND48.  This caused random() to be callled without first
 		initializing the right random number generator.  This
