@@ -1,6 +1,6 @@
 2001-06-19  Theodore Tso  <tytso@valinux.com>
 
-	* Release of pwgen 2.1
+	* Release of pwgen 2.01
 
 	* pwgen.c (usage): Add help/usage message
 
