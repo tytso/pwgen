@@ -1,0 +1,4 @@
+2001-06-19  Theodore Tso  <tytso@valinux.com>
+
+	* pwgen.c (usage): Add help/usage message
+

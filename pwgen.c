@@ -44,6 +44,31 @@ struct option pwgen_options[] = {
 };
 #endif
 
+const char *usage_msg =
+"Usage: pwgen [ OPTIONS ] [ pw_length ] [ num_pw ]\n\n"
+"Options supported by pwgen:\n"
+"  -c or -capitalize\n"
+"\tInclude at least one capital letter in the password\n"
+"  -n or --numerals\n"
+"\tInclude at least one number in the password\n"
+"  -s or --secure\n"
+"\tGenerate completely random passwords\n"	
+"  -h or --help\n"
+"\tPrint a help message\n"
+"  --no-numerals, --no-capitalize\n"
+"\tDon't include a number or capital letter in the password\n"
+"  -C\n\tPrint the generated passwords in columns\n"
+"  -1\n\tDon't print the generated passwords in columns\n"
+;	
+	
+void usage(void)
+{
+	fprintf(stderr, usage_msg);
+	
+	exit(1);
+}
+
+
 int main(int argc, char **argv)
 {
 	int	term_width = 80;
@@ -92,6 +117,10 @@ int main(int argc, char **argv)
 			break;
 		case '1':
 			do_columns = 0;
+			break;
+		case 'h':
+		case '?':
+			usage();
 			break;
 		}
 	}
