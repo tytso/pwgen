@@ -1,0 +1,93 @@
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+top_builddir = .
+my_dir = .
+prefix = @prefix@
+mandir = @mandir@
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+
+CC = @CC@
+DEFS = @DEFS@
+CFLAGS = @CFLAGS@
+CPPFLAGS = @CPPFLAGS@
+ALL_CFLAGS = $(CPPFLAGS) $(DEFS) $(USE_WFLAGS) $(CFLAGS) $(XTRA_CFLAGS) 
+LDFLAGS = @LDFLAGS@
+RM = @RM@
+MV = @MV@
+SED = @SED@
+PERL = @PERL@
+
+all:: pwgen
+
+.c.o:
+	$(CC) -c $(ALL_CFLAGS) $< -o $@
+
+OBJS= pwgen.o pw_phonemes.o pw_rand.o randnum.o
+
+SRCS= pwgen.c pw_phonemes.c pw_rand.c randnum.c
+
+
+pwgen: $(OBJS)
+	$(CC) -o pwgen $(OBJS)
+
+install: pwgen pwgen.1
+	mkdir -p $(DESTDIR)$(prefix)/bin $(DESTDIR)$(prefix)/man/man1
+	$(INSTALL_PROGRAM) pwgen $(DESTDIR)$(prefix)/bin/pwgen
+	$(INSTALL_DATA) pwgen.1 $(DESTDIR)$(mandir)/man1/pwgen.1
+	
+clean:
+	$(RM) $(OBJS) pwgen *~
+
+#
+# Autoconf magic...
+#
+
+$(top_builddir)/config.status: $(top_srcdir)/configure
+	cd $(top_builddir); ./config.status --recheck
+
+Makefile: $(srcdir)/Makefile.in $(DEP_MAKEFILE) $(top_builddir)/config.status
+	cd $(top_builddir); CONFIG_FILES=$(my_dir)/Makefile ./config.status
+
+$(top_srcdir)/configure: $(top_srcdir)/configure.in
+	cd $(top_srcdir) && autoconf
+
+#
+# Make depend magic...
+#
+
+.depend: Makefile $(SRCS) $(top_srcdir)/depfix.sed $(top_srcdir)/wordwrap.pl
+	if test -n "$(SRCS)" ; then \
+		$(CC) -M $(ALL_CFLAGS) $(SRCS) | \
+			$(SED) -f $(top_srcdir)/depfix.sed \
+			    -e 's; $(srcdir)/; $$(srcdir)/;g' \
+			    -e 's; $(top_srcdir)/; $$(top_srcdir)/;g' \
+			    -e 's; $(top_builddir)/; $$(top_builddir)/;g' \
+			    -e 's; \./; ;g' \
+			    -e '/^ *\\$$/d' | \
+			$(PERL) $(top_srcdir)/wordwrap.pl > .depend; \
+	else :; fi
+
+depend:: .depend
+	if test -n "$(SRCS)" ; then \
+		sed -e '/^# +++ Dependency line eater +++/,$$d' \
+			< $(srcdir)/Makefile.in | cat - .depend \
+			> $(srcdir)/Makefile.in.new; \
+	if cmp -s $(srcdir)/Makefile.in $(srcdir)/Makefile.in.new ; then \
+		$(RM) $(srcdir)/Makefile.in.new ; \
+	else \
+		$(MV) $(srcdir)/Makefile.in $(srcdir)/Makefile.in.old; \
+		$(MV) $(srcdir)/Makefile.in.new $(srcdir)/Makefile.in; \
+	fi ; else :; fi
+
+# +++ Dependency line eater +++
+# 
+# Makefile dependencies follow.  This must be the last section in
+# the Makefile.in file
+#
+pwgen.o: pwgen.c pwgen.h
+pw_phonemes.o: pw_phonemes.c pwgen.h
+pw_rand.o: pw_rand.c pwgen.h
+randnum.o: randnum.c pwgen.h
