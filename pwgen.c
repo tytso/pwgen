@@ -72,7 +72,8 @@ void usage(void)
 int main(int argc, char **argv)
 {
 	int	term_width = 80;
-	int	c, i, num_cols;
+	int	c, i;
+	int	num_cols = -1;
 	char	*buf, *tmp;
 	void	(*pwgen)(char *buf, int size, int pw_flags);
 
@@ -143,8 +144,11 @@ int main(int argc, char **argv)
 		}
 	}
 	
-	if (do_columns) 
+	if (do_columns) {
 		num_cols = term_width / (pw_length+1);
+		if (num_cols == 0)
+			num_cols = 1;
+	}
 	if (num_pw < 0)
 		num_pw = do_columns ? num_cols * 20 : 1;
 	
@@ -160,7 +164,7 @@ int main(int argc, char **argv)
 		else
 			printf("%s ", buf);
 	}
-	if ((i % num_cols) != 0 && (num_cols > 1))
+	if ((num_cols > 1) && ((i % num_cols) != 0))
 		fputc('\n', stdout);
 	free(buf);
 }
