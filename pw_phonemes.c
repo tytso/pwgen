@@ -69,7 +69,7 @@ try_again:
 	should_be = 0;
 	first = 1;
 
-	should_be = pw_random_number(1) ? VOWEL : CONSONANT;
+	should_be = pw_random_number(2) ? VOWEL : CONSONANT;
 	
 	while (c < size) {
 		i = pw_random_number(NUM_ELEMENTS);
@@ -115,13 +115,13 @@ try_again:
 		 */
 		if (feature_flags & PW_ONE_NUMBER) {
 			if (!first && (pw_random_number(10) < 3)) {
-				buf[c++] = pw_random_number(9)+'0';
+				buf[c++] = pw_random_number(10)+'0';
 				buf[c] = 0;
 				feature_flags &= ~PW_ONE_NUMBER;
 				
 				first = 1;
 				prev = 0;
-				should_be = pw_random_number(1) ?
+				should_be = pw_random_number(2) ?
 					VOWEL : CONSONANT;
 				continue;
 			}

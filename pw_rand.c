@@ -22,7 +22,7 @@ void pw_rand(char *buf, int size, int pw_flags)
 	int	i = 0;
 
 	while (i < size) {
-		ch = pw_random_number(LAST_CHAR - FIRST_CHAR) + FIRST_CHAR;
+		ch = pw_random_number(LAST_CHAR - FIRST_CHAR + 1) + FIRST_CHAR;
 		if (strchr(bad_chars, ch))
 			continue;
 		buf[i++] = ch;
