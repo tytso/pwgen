@@ -1,5 +1,9 @@
 2003-01-15  Theodore Ts'o  <tytso@mit.edu>
 
+	* randnum.c (get_random_fd): Use random() instead of rand() since
+		we initialize the random number generator using srandom() if
+		/dev/urandom and drand48() are not present.
+
 	* Makefile.in (pwgen): Use LDFLAGS when linking pwgen.
 
 	* pw_phonemes.c (pw_phonemes): Fix bug in how we call 

@@ -47,7 +47,7 @@ static int get_random_fd(void)
 #ifdef HAVE_DRAND48
 		drand48();
 #else
-		rand();
+		random();
 #endif
 	return fd;
 }
