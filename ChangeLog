@@ -1,5 +1,8 @@
 2002-07-15  Theodore Ts'o  <tytso@mit.edu>
 
+	* pwgen.1: Fix e-mail address in man page.  (Addresses Debian bug
+		#150579)
+
 	* Makefile.in (WALL_OPTS): Add gcc options to do lots of nit-picky
 		checking.
 
