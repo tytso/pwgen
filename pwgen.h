@@ -1,7 +1,7 @@
 /*
  * pwgen.h --- header file for password generator
  *
- * Copyright (C) 2001 by Theodore Ts'o
+ * Copyright (C) 2001,2002 by Theodore Ts'o
  * 
  * This file may be distributed under the terms of the GNU Public
  * License.

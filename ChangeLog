@@ -1,5 +1,7 @@
 2002-07-15  Theodore Ts'o  <tytso@mit.edu>
 
+	* Release of pwgen 2.02
+
 	* pwgen.c (main): If the number of characters is less than 5,
 		force the use of the fully random generator, since the
 		quality of phonetic generator is really bad if the lengths
