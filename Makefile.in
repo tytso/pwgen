@@ -40,7 +40,7 @@ pwgen: $(OBJS)
 	$(CC) -o pwgen $(OBJS)
 
 install: pwgen pwgen.1
-	mkdir -p $(DESTDIR)$(prefix)/bin $(DESTDIR)$(prefix)/man/man1
+	mkdir -p $(DESTDIR)$(prefix)/bin $(DESTDIR)$(mandir)/man1
 	$(INSTALL_PROGRAM) pwgen $(DESTDIR)$(prefix)/bin/pwgen
 	$(INSTALL_DATA) $(srcdir)/pwgen.1 $(DESTDIR)$(mandir)/man1/pwgen.1
 	

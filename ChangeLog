@@ -1,5 +1,8 @@
 2002-07-16  Theodore Ts'o  <tytso@mit.edu>
 
+	* Makefile.in (install): Create the directory using $mandir, and
+		not $(prefix)/man.
+
 	* pw_phonemes.c: Add missing #include of string.h
 
 2002-07-15  Theodore Ts'o  <tytso@mit.edu>
