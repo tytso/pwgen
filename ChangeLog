@@ -1,5 +1,9 @@
 2003-01-15  Theodore Ts'o  <tytso@mit.edu>
 
+	* pw_rand.c (pw_rand): Use a list of acceptable characters instead
+		of a list of unacceptable characters.  This is slightly
+		faster, and the code is cleaner and easier to understand.
+
 	* randnum.c (get_random_fd): Use random() instead of rand() since
 		we initialize the random number generator using srandom() if
 		/dev/urandom and drand48() are not present.

@@ -11,20 +11,16 @@
 #include <string.h>
 #include "pwgen.h"
 
-#define FIRST_CHAR '!'
-#define LAST_CHAR '~'
-
-static char bad_chars[] = "'\\\"!@#$%^&*()+=_-{}[]<>`~?:;,/.|";
+#define PW_CHARS "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
 void pw_rand(char *buf, int size, int pw_flags)
 {
-	char	ch;
-	int	i = 0;
+	char	ch, *chars = PW_CHARS;
+	int	i = 0, len;
 
+	len = strlen(chars);
 	while (i < size) {
-		ch = pw_random_number(LAST_CHAR - FIRST_CHAR + 1) + FIRST_CHAR;
-		if (strchr(bad_chars, ch))
-			continue;
+		ch = chars[pw_random_number(len)];
 		buf[i++] = ch;
 	}
 	buf[size] = 0;
