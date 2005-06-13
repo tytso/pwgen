@@ -1,3 +1,8 @@
+2005-06-13  Theodore Ts'o  <tytso@mit.edu>
+
+	* Fix obvious spelling typo in pwgen.1.  (Addresses Debian Bug
+		#311461)
+
 2003-01-15  Theodore Ts'o  <tytso@mit.edu>
 
 	* Release of pwgen 2.03
