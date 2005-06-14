@@ -31,9 +31,9 @@ all:: pwgen
 .c.o:
 	$(CC) -c $(ALL_CFLAGS) $< -o $@
 
-OBJS= pwgen.o pw_phonemes.o pw_rand.o randnum.o
+OBJS= pwgen.o pw_phonemes.o pw_rand.o randnum.o sha1.o sha1num.o
 
-SRCS= pwgen.c pw_phonemes.c pw_rand.c randnum.c
+SRCS= pwgen.c pw_phonemes.c pw_rand.c randnum.c sha1.c sha1num.c
 
 
 pwgen: $(OBJS)
@@ -127,3 +127,5 @@ pwgen.o: pwgen.c pwgen.h
 pw_phonemes.o: pw_phonemes.c pwgen.h
 pw_rand.o: pw_rand.c pwgen.h
 randnum.o: randnum.c pwgen.h
+sha1.o: sha1.c sha1.h 
+sha1num.o: sha1num.c sha1.h pwgen.h

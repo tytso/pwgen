@@ -21,8 +21,10 @@
 extern double drand48(void);
 #endif
 
+static int get_random_fd(void);
+
 /* Borrowed/adapted from e2fsprogs's UUID generation code */
-static int get_random_fd(void)
+static int get_random_fd()
 {
 	struct timeval	tv;
 	static int	fd = -2;
@@ -56,7 +58,8 @@ static int get_random_fd(void)
  * Generate a random number n, where 0 <= n < max_num, using
  * /dev/urandom if possible.
  */
-int pw_random_number(int max_num)
+int pw_random_number(max_num)
+	int max_num;
 {
 	int i, fd = get_random_fd();
 	int lose_counter = 0, nbytes=4;

@@ -71,6 +71,20 @@ only be used for machine passwords, since otherwise it's almost
 guaranteed that users will simply write the password on a piece of 
 paper taped to the monitor...
 .TP
+.B \-H, --sha1=\fI/path/to/file[#seed]
+Will use the sha1's hash of given file and the optional seed to create  
+password. It will allow you to compute the same password later, 
+if you remember the file, seed, and pwgen's options used.
+ie: pwgen -H ~/your_favourite.mp3#your@email.com gives 
+a list of possibles passwords for your pop3 account, and you can
+ask this list again and again.
+.IP
+.B WARNING:
+The passwords generated using this option are not very random.  If you use
+this option, make sure the attacker can not obtain a copy of the file.
+Also, note that the name of the file may be easily available from the
+~/.history or ~/.bash_history file.
+.TP
 .B \-h, --help
 Print a help message.
 .TP

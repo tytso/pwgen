@@ -26,13 +26,10 @@ struct pw_element {
 #define PW_ONE_NUMBER	0x0001
 #define PW_ONE_CASE	0x0002
 
-struct pwgen_func {
-	const char	*name;
-	void		(*func)(char *buf, int size, int pw_flags);
-	int		flags;
-};
-
 /* Function prototypes */
+
+/* pointer to choose between random or sha1 pseudo random number generator */
+extern int (*pw_number)(int max_num);
 
 /* pw_phonemes.c */
 extern void pw_phonemes(char *buf, int size, int pw_flags);
@@ -42,3 +39,7 @@ extern void pw_rand(char *buf, int size, int pw_flags);
 
 /* randnum.c */
 extern int pw_random_number(int max_num);
+
+/* sha1num.c */
+extern void pw_sha1_init(char *sha1);
+extern int pw_sha1_number(int max_num);

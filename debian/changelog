@@ -3,6 +3,8 @@ pwgen (2.03-2) unstable; urgency=low
   * Adopt maintainership of pwgen.  (Closes: #282076)
   * Fix minor bug in man page.  (Closes: #311461)
   * Convert from debmake to debhelper
+  * Add the --sha1 option so that pwgen uses the SHA1 hash to generate
+    (not so) random passwords.
 
  -- Theodore Y. Ts'o <tytso@mit.edu>  Tue, 14 Jun 2005 14:59:19 -0400
 

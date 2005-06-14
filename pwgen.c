@@ -18,11 +18,8 @@
 
 #include "pwgen.h"
 
-struct pwgen_func generators[] = {
-	{ "phonemes",	pw_phonemes,	0 },
-	{ "rand",	pw_rand,	0 },
-	{ 0,		0,		0 }
-};
+/* Globals variables */
+int (*pw_number)(int max_num);
 
 /* Program parameters set via getopt */
 
@@ -42,6 +39,7 @@ struct option pwgen_options[] = {
 	{ "help", no_argument, 0, 'h'},
 	{ "no-numerals", no_argument, &numeric_flag, 0 },
 	{ "no-capitalize", no_argument, &case_flag, 0 },
+	{ "sha1", required_argument, 0, 'H' },
 	{ 0, 0, 0, 0}
 };
 #endif
@@ -59,6 +57,8 @@ const char *usage_msg =
 "\tPrint a help message\n"
 "  --no-numerals, --no-capitalize\n"
 "\tDon't include a number or capital letter in the password\n"
+"  -H or --sha1=path/to/file[#seed]\n"
+"\tUse sha1 hash of given file as a (not so) random generator\n"
 "  -C\n\tPrint the generated passwords in columns\n"
 "  -1\n\tDon't print the generated passwords in columns\n"
 ;	
@@ -79,6 +79,7 @@ int main(int argc, char **argv)
 	void	(*pwgen)(char *inbuf, int size, int pw_flags);
 
 	pwgen = pw_phonemes;
+	pw_number = pw_random_number;
 	if (isatty(1)) {
 		do_columns = 1;
 		case_flag = PW_ONE_CASE;
@@ -87,7 +88,7 @@ int main(int argc, char **argv)
 
 	while (1) {
 #ifdef HAVE_GETOPT_LONG
-		c = getopt_long(argc, argv, "1aCcnN:sh", pwgen_options, 0);
+		c = getopt_long(argc, argv, "1aCcnN:shH:", pwgen_options, 0);
 #else
 		c = getopt(argc, argv, "1aCcnN:sh");
 #endif
@@ -119,6 +120,10 @@ int main(int argc, char **argv)
 			break;
 		case '1':
 			do_columns = 0;
+			break;
+		case 'H': 
+			pw_sha1_init(optarg);
+			pw_number = pw_sha1_number;
 			break;
 		case 'h':
 		case '?':

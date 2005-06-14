@@ -69,10 +69,10 @@ try_again:
 	should_be = 0;
 	first = 1;
 
-	should_be = pw_random_number(2) ? VOWEL : CONSONANT;
+	should_be = pw_number(2) ? VOWEL : CONSONANT;
 	
 	while (c < size) {
-		i = pw_random_number(NUM_ELEMENTS);
+		i = pw_number(NUM_ELEMENTS);
 		str = elements[i].str;
 		len = strlen(str);
 		flags = elements[i].flags;
@@ -98,7 +98,7 @@ try_again:
 		/* Handle PW_ONE_CASE */
 		if (feature_flags & PW_ONE_CASE) {
 			if ((first || flags & CONSONANT) &&
-			    (pw_random_number(10) < 3)) {
+			    (pw_number(10) < 3)) {
 				buf[c] = toupper(buf[c]);
 				feature_flags &= ~PW_ONE_CASE;
 			}
@@ -114,14 +114,14 @@ try_again:
 		 * Handle PW_ONE_NUMBER
 		 */
 		if (feature_flags & PW_ONE_NUMBER) {
-			if (!first && (pw_random_number(10) < 3)) {
-				buf[c++] = pw_random_number(10)+'0';
+			if (!first && (pw_number(10) < 3)) {
+				buf[c++] = pw_number(10)+'0';
 				buf[c] = 0;
 				feature_flags &= ~PW_ONE_NUMBER;
 				
 				first = 1;
 				prev = 0;
-				should_be = pw_random_number(2) ?
+				should_be = pw_number(2) ?
 					VOWEL : CONSONANT;
 				continue;
 			}
@@ -135,7 +135,7 @@ try_again:
 		} else { /* should_be == VOWEL */
 			if ((prev & VOWEL) ||
 			    (flags & DIPTHONG) ||
-			    (pw_random_number(10) > 3))
+			    (pw_number(10) > 3))
 				should_be = CONSONANT;
 			else
 				should_be = VOWEL;

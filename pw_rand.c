@@ -20,7 +20,7 @@ void pw_rand(char *buf, int size, int pw_flags)
 
 	len = strlen(chars);
 	while (i < size) {
-		ch = chars[pw_random_number(len)];
+		ch = chars[pw_number(len)];
 		buf[i++] = ch;
 	}
 	buf[size] = 0;

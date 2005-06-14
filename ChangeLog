@@ -1,3 +1,12 @@
+2005-06-14  Theodore Ts'o  <tytso@mit.edu>
+
+	* pwgen.c: Add -H, --sha1 option, to allow computing reproducible
+		passwords, given a known file, and a known seed.
+		(ie: pwgen -H ~/my_favourite.mp3#olivier@guerrier.com gives me
+		a list of possibles passwords for my pop3 account, and I can
+		ask this list again and again).   Feature suggested and
+		implemented by Olivier Guerrier <olivier@guerrier.com>.
+
 2005-06-13  Theodore Ts'o  <tytso@mit.edu>
 
 	* Fix obvious spelling typo in pwgen.1.  (Addresses Debian Bug
