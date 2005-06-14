@@ -19,8 +19,7 @@ const char *sha1_magic="pwgen";
 unsigned char sha1sum[20];
 int sha1sum_idx=20;
 	
-void pw_sha1_init(sha1)
-	char *sha1;
+void pw_sha1_init(char *sha1)
 {
         int i = 0;
 	char *seed;
@@ -59,16 +58,15 @@ void pw_sha1_init(sha1)
 }
 
 
-int pw_sha1_number(max_num)
-	int max_num;
+int pw_sha1_number(int max_num)
 {
 	int val;
 	sha1_context ctx;
 	
-	if(sha1sum_idx>19) 
-	{
+	if (sha1sum_idx>19) {
 		sha1sum_idx = 0;
-		sha1_update(&sha1_ctx, sha1_seed, strlen(sha1_seed));
+		sha1_update(&sha1_ctx, (unsigned char *) sha1_seed, 
+			    strlen(sha1_seed));
 		ctx = sha1_ctx;
 		sha1_finish(&ctx, sha1sum );
 	}

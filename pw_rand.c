@@ -15,7 +15,8 @@
 
 void pw_rand(char *buf, int size, int pw_flags)
 {
-	char	ch, *chars = PW_CHARS;
+	char	ch;
+	const char	*chars = PW_CHARS;
 	int	i = 0, len;
 
 	len = strlen(chars);

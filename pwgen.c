@@ -44,28 +44,28 @@ struct option pwgen_options[] = {
 };
 #endif
 
-const char *usage_msg =
-"Usage: pwgen [ OPTIONS ] [ pw_length ] [ num_pw ]\n\n"
-"Options supported by pwgen:\n"
-"  -c or -capitalize\n"
-"\tInclude at least one capital letter in the password\n"
-"  -n or --numerals\n"
-"\tInclude at least one number in the password\n"
-"  -s or --secure\n"
-"\tGenerate completely random passwords\n"	
-"  -h or --help\n"
-"\tPrint a help message\n"
-"  --no-numerals, --no-capitalize\n"
-"\tDon't include a number or capital letter in the password\n"
-"  -H or --sha1=path/to/file[#seed]\n"
-"\tUse sha1 hash of given file as a (not so) random generator\n"
-"  -C\n\tPrint the generated passwords in columns\n"
-"  -1\n\tDon't print the generated passwords in columns\n"
-;	
-	
 static void usage(void)
 {
-	fprintf(stderr, usage_msg);
+	fputs("Usage: pwgen [ OPTIONS ] [ pw_length ] [ num_pw ]\n\n", stderr);
+	fputs("Options supported by pwgen:\n", stderr);
+	fputs("  -c or -capitalize\n", stderr);
+	fputs("\tInclude at least one capital letter in the password\n", 
+	      stderr);
+	fputs("  -n or --numerals\n", stderr);
+	fputs("\tInclude at least one number in the password\n", stderr);
+	fputs("  -s or --secure\n", stderr);
+	fputs("\tGenerate completely random passwords\n", stderr);
+	fputs("  -h or --help\n", stderr);
+	fputs("\tPrint a help message\n", stderr);
+	fputs("  --no-numerals, --no-capitalize\n", stderr);
+	fputs("\tDon't include a number or capital letter in the password\n", 
+	      stderr);
+	fputs("  -H or --sha1=path/to/file[#seed]\n", stderr);
+	fputs("\tUse sha1 hash of given file as a (not so) random generator\n",
+	      stderr);
+	fputs("  -C\n\tPrint the generated passwords in columns\n", stderr);
+	fputs("  -1\n\tDon't print the generated passwords in columns\n", 
+	      stderr);
 	exit(1);
 }
 

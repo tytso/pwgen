@@ -13,7 +13,7 @@ INSTALL_DATA = @INSTALL_DATA@
 
 WALL_OPTS = -Wall -Wnested-externs -Wstrict-prototypes -Wmissing-prototypes \
 	-Wshadow -Wwrite-strings -Wpointer-arith -Wcast-qual -Wcast-align \
-	-Wtraditional
+	-pedantic
 CC = @CC@
 DEFS = @DEFS@
 CFLAGS = @CFLAGS@ $(WALL_OPTS)
