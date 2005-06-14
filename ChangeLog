@@ -17,7 +17,7 @@
 	* Release of pwgen 2.03
 
 	* randnum.c: Fix #ifdef to use HAVE_DRAND48 instead of just
-		RAND48.  This caused random() to be callled without first
+		RAND48.  This caused random() to be called without first
 		initializing the right random number generator.  This
 		apparently caused pwgen to core dump under AIX, which
 		seems surprising.
