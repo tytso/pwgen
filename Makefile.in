@@ -43,14 +43,14 @@ install: pwgen pwgen.1
 	mkdir -p $(DESTDIR)$(prefix)/bin $(DESTDIR)$(mandir)/man1
 	$(INSTALL_PROGRAM) pwgen $(DESTDIR)$(prefix)/bin/pwgen
 	$(INSTALL_DATA) $(srcdir)/pwgen.1 $(DESTDIR)$(mandir)/man1/pwgen.1
-	
+
 clean:
 	$(RM) -f $(OBJS) pwgen *~
 
-distclean:
-	$(RM) -f config.status config.log config.cache Makefile \
-		$(srcdir)/Makefile.in.old $(srcdir)/.exclude-file
-
+distclean: clean
+	$(RM) -rf config.status config.log config.cache Makefile \
+		$(srcdir)/Makefile.in.old $(srcdir)/.exclude-file \
+		$(srcdir)/autom4te.cache
 
 #
 # Build source tar ball...
