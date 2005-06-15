@@ -1,4 +1,4 @@
-PWGEN_VERSION=2.03
+PWGEN_VERSION=2.04
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@

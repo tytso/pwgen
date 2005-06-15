@@ -1,5 +1,6 @@
-pwgen (2.03-2) unstable; urgency=low
+pwgen (2.04-1) unstable; urgency=low
 
+  * New upstream version.
   * Adopt maintainership of pwgen.  (Closes: #282076)
   * Fix minor bug in man page.  (Closes: #311461)
   * Convert from debmake to debhelper
