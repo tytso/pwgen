@@ -1,3 +1,9 @@
+2005-06-15  Theodore Ts'o  <tytso@mit.edu>
+
+	* pw_phonemes.c (pw_phonemes): Allow one or more capital letters
+		and one or more digits in the generated passwords.
+		(Addresses Debian Bug: #182595)
+
 2005-06-14  Theodore Ts'o  <tytso@mit.edu>
 
 	* pwgen.1: Explain that human-memorable passwords are vulnerable

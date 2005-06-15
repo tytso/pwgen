@@ -15,8 +15,10 @@ pwgen (2.03-2) unstable; urgency=low
     passwords.  (Closes: #276307)
   * In the pwgen man page, explain that human-memorable passwords are
     subject to off-line brute force attacks.  (Closes: #276976)
+  * Allow one or more capital letters and digits in human-friendly
+    passwords (Closes: #182595)
 
- -- Theodore Y. Ts'o <tytso@mit.edu>  Tue, 14 Jun 2005 21:53:48 -0400
+ -- Theodore Y. Ts'o <tytso@mit.edu>  Wed, 15 Jun 2005 00:39:10 -0400
 
 pwgen (2.03-1) unstable; urgency=high
 

@@ -97,9 +97,9 @@ try_again:
 		strcpy(buf+c, str);
 
 		/* Handle PW_UPPERS */
-		if (feature_flags & PW_UPPERS) {
+		if (pw_flags & PW_UPPERS) {
 			if ((first || flags & CONSONANT) &&
-			    (pw_number(10) < 3)) {
+			    (pw_number(10) < 2)) {
 				buf[c] = toupper(buf[c]);
 				feature_flags &= ~PW_UPPERS;
 			}
@@ -123,7 +123,7 @@ try_again:
 		/*
 		 * Handle PW_DIGITS
 		 */
-		if (feature_flags & PW_DIGITS) {
+		if (pw_flags & PW_DIGITS) {
 			if (!first && (pw_number(10) < 3)) {
 				do {
 					ch = pw_number(10)+'0';
