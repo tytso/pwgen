@@ -5,3 +5,4 @@ config.log
 config.cache
 .depend
 build
+Makefile
