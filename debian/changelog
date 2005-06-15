@@ -11,8 +11,10 @@ pwgen (2.03-2) unstable; urgency=low
     options work when --secure is specified.
   * Add --ambiguous option which avoids characters that can be confused by
     the user.  (Closes: #51307)
+  * Fix bug where --no-capitalized and --no-numerals were ignored for short
+    passwords.  (Closes: #276307)
 
- -- Theodore Y. Ts'o <tytso@mit.edu>  Tue, 14 Jun 2005 21:44:15 -0400
+ -- Theodore Y. Ts'o <tytso@mit.edu>  Tue, 14 Jun 2005 21:53:48 -0400
 
 pwgen (2.03-1) unstable; urgency=high
 
