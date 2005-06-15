@@ -23,13 +23,18 @@ struct pw_element {
 /*
  * Flags for the pwgen function
  */
-#define PW_ONE_NUMBER	0x0001
-#define PW_ONE_CASE	0x0002
-
-/* Function prototypes */
+#define PW_DIGITS	0x0001	/* At least one digit */
+#define PW_UPPERS	0x0002	/* At least one upper letter */
+#define PW_SYMBOLS	0x0004
+#define PW_AMBIGUOUS	0x0008
 
 /* pointer to choose between random or sha1 pseudo random number generator */
 extern int (*pw_number)(int max_num);
+
+extern const char *pw_symbols;
+extern const char *pw_ambiguous;
+
+/* Function prototypes */
 
 /* pw_phonemes.c */
 extern void pw_phonemes(char *buf, int size, int pw_flags);

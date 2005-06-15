@@ -1,5 +1,13 @@
 2005-06-14  Theodore Ts'o  <tytso@mit.edu>
 
+	* pwgen.c, pwgen.h, pw_rand.c, pwgen.1: Make -A and -0 aliases to
+		--no-capitalize and --no-numerals, and make those options
+		work when --secure is specified.
+
+	* pwgen.c, pwgen.h, pw_rand.c, pw_phonemes.c, pwgen.c: Add support
+		for the --symbols/-y option, which adds special characters
+		to the generated password.  (Addresses Debian Bug: #154561)
+	
 	* pwgen.c: Add -H, --sha1 option, to allow computing reproducible
 		passwords, given a known file, and a known seed.
 		(ie: pwgen -H ~/my_favourite.mp3#olivier@guerrier.com gives me

@@ -37,6 +37,15 @@ is compatible with a previous version of this program.
 .B
 .SH OPTIONS
 .TP
+.B \-0, \--no-numerals
+Don't include numbers in the generated passwords.
+.TP
+.B \-1
+Print the generated passwords one per line.
+.TP
+.B \-A, \--no-capitalize
+Don't bother to include any capital letters in the generated passwords.
+.TP
 .B \-a, --alt-phonics
 This option doesn't do anything special; it is present only for
 backwards compatibility.
@@ -49,27 +58,15 @@ if the standard output is a tty device.
 Print the generated passwords in columns.  This is the default if the 
 standard output is a tty device.
 .TP
-.B \-n, --numerals
-Include at least one number in the password.  This is the default
-if the standard output is a tty device.
-.TP
-.B \--no-numerals
-Don't include a number in the generated passwords.
-.TP
-.B \--no-capitalize
-Don't bother to include any capital letters in the generated passwords.
-.TP
 .B \-N, --num-passwords=\fInum
 Generate 
 .I num
 passwords.  This defaults to a screenful if passwords are 
 printed by columns, and one password.
 .TP
-.B \-s, --secure
-Generate completely random, hard-to-memorize passwords.  These should
-only be used for machine passwords, since otherwise it's almost
-guaranteed that users will simply write the password on a piece of 
-paper taped to the monitor...
+.B \-n, --numerals
+Include at least one number in the password.  This is the default
+if the standard output is a tty device.
 .TP
 .B \-H, --sha1=\fI/path/to/file[#seed]
 Will use the sha1's hash of given file and the optional seed to create  
@@ -88,8 +85,14 @@ Also, note that the name of the file may be easily available from the
 .B \-h, --help
 Print a help message.
 .TP
-.B \-1
-Print the generated passwords one per line.
+.B \-s, --secure
+Generate completely random, hard-to-memorize passwords.  These should
+only be used for machine passwords, since otherwise it's almost
+guaranteed that users will simply write the password on a piece of 
+paper taped to the monitor...
+.TP
+.B \-y, --symbols
+Include at least one special character in the password. 
 .SH AUTHOR
 This version of 
 .B pwgen

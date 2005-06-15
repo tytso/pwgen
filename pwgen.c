@@ -25,8 +25,7 @@ int (*pw_number)(int max_num);
 
 int	pw_length = 8;
 int	num_pw = -1;
-int	case_flag = 0;
-int	numeric_flag = 0;
+int	pwgen_flags = 0;
 int	do_columns = 0;
 
 #ifdef HAVE_GETOPT_LONG
@@ -34,15 +33,18 @@ struct option pwgen_options[] = {
 	{ "alt-phonics", no_argument, 0, 'a' },
 	{ "capitalize", no_argument, 0, 'c' },
 	{ "numerals", no_argument, 0, 'n'},
+	{ "symbols", no_argument, 0, 'y'},
 	{ "num-passwords", required_argument, 0, 'N'},
 	{ "secure", no_argument, 0, 's' },
 	{ "help", no_argument, 0, 'h'},
-	{ "no-numerals", no_argument, &numeric_flag, 0 },
-	{ "no-capitalize", no_argument, &case_flag, 0 },
+	{ "no-numerals", no_argument, 0, '0' },
+	{ "no-capitalize", no_argument, 0, 'A' },
 	{ "sha1", required_argument, 0, 'H' },
 	{ 0, 0, 0, 0}
 };
 #endif
+
+const char *pw_options = "01AaCcnN:shH:y";
 
 static void usage(void)
 {
@@ -51,15 +53,21 @@ static void usage(void)
 	fputs("  -c or -capitalize\n", stderr);
 	fputs("\tInclude at least one capital letter in the password\n", 
 	      stderr);
+	fputs("  -A or --no-capitalize\n", stderr);
+	fputs("\tDon't include capital letters in the password\n", 
+	      stderr);
 	fputs("  -n or --numerals\n", stderr);
 	fputs("\tInclude at least one number in the password\n", stderr);
+	fputs("  -0 or --no-numerals\n", stderr);
+	fputs("\tDon't include numbers in the password\n", 
+	      stderr);
+	fputs("  -y or --symbols\n", stderr);
+	fputs("\tInclude at least one special symbol in the password\n", 
+	      stderr);
 	fputs("  -s or --secure\n", stderr);
 	fputs("\tGenerate completely random passwords\n", stderr);
 	fputs("  -h or --help\n", stderr);
 	fputs("\tPrint a help message\n", stderr);
-	fputs("  --no-numerals, --no-capitalize\n", stderr);
-	fputs("\tDon't include a number or capital letter in the password\n", 
-	      stderr);
 	fputs("  -H or --sha1=path/to/file[#seed]\n", stderr);
 	fputs("\tUse sha1 hash of given file as a (not so) random generator\n",
 	      stderr);
@@ -82,26 +90,31 @@ int main(int argc, char **argv)
 	pw_number = pw_random_number;
 	if (isatty(1)) {
 		do_columns = 1;
-		case_flag = PW_ONE_CASE;
-		numeric_flag = PW_ONE_NUMBER;
+		pwgen_flags |= PW_DIGITS | PW_UPPERS;
 	}
 
 	while (1) {
 #ifdef HAVE_GETOPT_LONG
-		c = getopt_long(argc, argv, "1aCcnN:shH:", pwgen_options, 0);
+		c = getopt_long(argc, argv, pw_options, pwgen_options, 0);
 #else
-		c = getopt(argc, argv, "1aCcnN:sh");
+		c = getopt(argc, argv, pw_options);
 #endif
 		if (c == -1)
 			break;
 		switch (c) {
+		case '0':
+			pwgen_flags &= ~PW_DIGITS;
+			break;
+		case 'A':
+			pwgen_flags &= ~PW_UPPERS;
+			break;
 		case 'a':
 			break;
 		case 'c':
-			case_flag = PW_ONE_CASE;
+			pwgen_flags |= PW_UPPERS;
 			break;
 		case 'n':
-			numeric_flag = PW_ONE_NUMBER;
+			pwgen_flags |= PW_DIGITS;
 			break;
 		case 'N':
 			num_pw = strtol(optarg, &tmp, 0);
@@ -124,6 +137,9 @@ int main(int argc, char **argv)
 		case 'H': 
 			pw_sha1_init(optarg);
 			pw_number = pw_sha1_number;
+			break;
+		case 'y':
+			pwgen_flags |= PW_SYMBOLS;
 			break;
 		case 'h':
 		case '?':
@@ -166,7 +182,7 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 	for (i=0; i < num_pw; i++) {
-		pwgen(buf, pw_length, case_flag | numeric_flag);
+		pwgen(buf, pw_length, pwgen_flags);
 		if (!do_columns || ((i % num_cols) == (num_cols-1)))
 			printf("%s\n", buf);
 		else

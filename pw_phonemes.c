@@ -61,6 +61,7 @@ void pw_phonemes(char *buf, int size, int pw_flags)
 	int		c, i, len, flags, feature_flags;
 	int		prev, should_be, first;
 	const char	*str;
+	char		ch;
 
 try_again:
 	feature_flags = pw_flags;
@@ -95,12 +96,12 @@ try_again:
 		 */
 		strcpy(buf+c, str);
 
-		/* Handle PW_ONE_CASE */
-		if (feature_flags & PW_ONE_CASE) {
+		/* Handle PW_UPPERS */
+		if (feature_flags & PW_UPPERS) {
 			if ((first || flags & CONSONANT) &&
 			    (pw_number(10) < 3)) {
 				buf[c] = toupper(buf[c]);
-				feature_flags &= ~PW_ONE_CASE;
+				feature_flags &= ~PW_UPPERS;
 			}
 		}
 		
@@ -111,13 +112,13 @@ try_again:
 			break;
 		
 		/*
-		 * Handle PW_ONE_NUMBER
+		 * Handle PW_DIGITS
 		 */
-		if (feature_flags & PW_ONE_NUMBER) {
+		if (feature_flags & PW_DIGITS) {
 			if (!first && (pw_number(10) < 3)) {
 				buf[c++] = pw_number(10)+'0';
 				buf[c] = 0;
-				feature_flags &= ~PW_ONE_NUMBER;
+				feature_flags &= ~PW_DIGITS;
 				
 				first = 1;
 				prev = 0;
@@ -127,6 +128,20 @@ try_again:
 			}
 		}
 				
+		/* Handle PW_SYMBOLS */
+		if (pw_flags & PW_SYMBOLS) {
+			if (!first && (pw_number(10) < 2)) {
+				do {
+					ch = pw_symbols[
+						pw_number(strlen(pw_symbols))];
+				} while ((pw_flags & PW_AMBIGUOUS) 
+					&& strchr(pw_ambiguous, ch));
+				buf[c++] = ch;
+				buf[c] = 0;
+				feature_flags &= ~PW_SYMBOLS;
+			}
+		}
+
 		/*
 		 * OK, figure out what the next element should be
 		 */
@@ -143,6 +158,6 @@ try_again:
 		prev = flags;
 		first = 0;
 	}
-	if (feature_flags & (PW_ONE_CASE | PW_ONE_NUMBER))
+	if (feature_flags & (PW_UPPERS | PW_DIGITS | PW_SYMBOLS))
 		goto try_again;
 }

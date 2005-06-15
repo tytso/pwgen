@@ -5,6 +5,10 @@ pwgen (2.03-2) unstable; urgency=low
   * Convert from debmake to debhelper
   * Add the --sha1 option so that pwgen uses the SHA1 hash to generate
     (not so) random passwords.
+  * Add --symbols option which adds special symbols to the password.  
+    (Closes: #154561)
+  * Add short options for --no-capitalize and --no-numerals and make those
+    options work when --secure is specified.
 
  -- Theodore Y. Ts'o <tytso@mit.edu>  Tue, 14 Jun 2005 14:59:19 -0400
 
