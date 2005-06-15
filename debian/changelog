@@ -13,6 +13,8 @@ pwgen (2.03-2) unstable; urgency=low
     the user.  (Closes: #51307)
   * Fix bug where --no-capitalized and --no-numerals were ignored for short
     passwords.  (Closes: #276307)
+  * In the pwgen man page, explain that human-memorable passwords are
+    subject to off-line brute force attacks.  (Closes: #276976)
 
  -- Theodore Y. Ts'o <tytso@mit.edu>  Tue, 14 Jun 2005 21:53:48 -0400
 

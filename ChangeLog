@@ -1,5 +1,9 @@
 2005-06-14  Theodore Ts'o  <tytso@mit.edu>
 
+	* pwgen.1: Explain that human-memorable passwords are vulnerable
+		to off-line brute force attacks.  (Addresses Debian Bug:
+		#276976)
+
 	* pwgen.c, pwgen.h, pw_rand.c, pwgen.1: Make -A and -0 aliases to
 		--no-capitalize and --no-numerals, and make those options
 		work when --secure is specified.
