@@ -40,17 +40,18 @@ struct option pwgen_options[] = {
 	{ "no-numerals", no_argument, 0, '0' },
 	{ "no-capitalize", no_argument, 0, 'A' },
 	{ "sha1", required_argument, 0, 'H' },
+	{ "ambiguous", no_argument, 0, 'B' },
 	{ 0, 0, 0, 0}
 };
 #endif
 
-const char *pw_options = "01AaCcnN:shH:y";
+const char *pw_options = "01AaBCcnN:shH:y";
 
 static void usage(void)
 {
 	fputs("Usage: pwgen [ OPTIONS ] [ pw_length ] [ num_pw ]\n\n", stderr);
 	fputs("Options supported by pwgen:\n", stderr);
-	fputs("  -c or -capitalize\n", stderr);
+	fputs("  -c or --capitalize\n", stderr);
 	fputs("\tInclude at least one capital letter in the password\n", 
 	      stderr);
 	fputs("  -A or --no-capitalize\n", stderr);
@@ -66,6 +67,9 @@ static void usage(void)
 	      stderr);
 	fputs("  -s or --secure\n", stderr);
 	fputs("\tGenerate completely random passwords\n", stderr);
+	fputs("  -B or --ambiguous\n", stderr);
+	fputs("\tDon't include ambiguous characters in the password\n", 
+	      stderr);
 	fputs("  -h or --help\n", stderr);
 	fputs("\tPrint a help message\n", stderr);
 	fputs("  -H or --sha1=path/to/file[#seed]\n", stderr);
@@ -109,6 +113,9 @@ int main(int argc, char **argv)
 			pwgen_flags &= ~PW_UPPERS;
 			break;
 		case 'a':
+			break;
+		case 'B':
+			pwgen_flags |= PW_AMBIGUOUS;
 			break;
 		case 'c':
 			pwgen_flags |= PW_UPPERS;

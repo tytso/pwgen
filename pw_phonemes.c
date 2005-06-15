@@ -61,7 +61,7 @@ void pw_phonemes(char *buf, int size, int pw_flags)
 	int		c, i, len, flags, feature_flags;
 	int		prev, should_be, first;
 	const char	*str;
-	char		ch;
+	char		ch, *cp;
 
 try_again:
 	feature_flags = pw_flags;
@@ -107,6 +107,15 @@ try_again:
 		
 		c += len;
 		
+		/* Handle the AMBIGUOUS flag */
+		if (pw_flags & PW_AMBIGUOUS) {
+			cp = strpbrk(buf, pw_ambiguous);
+			if (cp) {
+				*cp = 0;
+				c = strlen(buf);
+			}
+		}
+		
 		/* Time to stop? */
 		if (c >= size)
 			break;
@@ -116,7 +125,11 @@ try_again:
 		 */
 		if (feature_flags & PW_DIGITS) {
 			if (!first && (pw_number(10) < 3)) {
-				buf[c++] = pw_number(10)+'0';
+				do {
+					ch = pw_number(10)+'0';
+				} while ((pw_flags & PW_AMBIGUOUS) 
+					 && strchr(pw_ambiguous, ch));
+				buf[c++] = ch;
 				buf[c] = 0;
 				feature_flags &= ~PW_DIGITS;
 				

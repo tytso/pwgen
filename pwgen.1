@@ -50,6 +50,13 @@ Don't bother to include any capital letters in the generated passwords.
 This option doesn't do anything special; it is present only for
 backwards compatibility.
 .TP
+.B \-B, --ambiguous
+Don't use characters that could be confused by the user when printed,
+such as 'l' and '1', or '0' or 'O'.  This reduces the number of possible 
+passwords signficantly, and as such reduces the quality of the
+passwords.  It may be useful for users who have bad vision, but in
+general use of this option is not recommended.
+.TP
 .B \-c, --capitalize
 Include at least one capital letter in the password.  This is the default 
 if the standard output is a tty device.
