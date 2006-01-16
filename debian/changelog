@@ -1,4 +1,4 @@
-pwgen (2.04-2) unstable; urgency=low
+pwgen (2.05-1) unstable; urgency=low
 
   * Add a udeb for debian-installer.  Thanks to Martin Michlmayr for the
     patch.  (Closes: #271115)

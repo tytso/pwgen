@@ -1,5 +1,7 @@
 2006-01-15  Theodore Ts'o  <tytso@mit.edu>
 
+	* Release of pwgen 2.05
+
 	* pwgen.1: Fix spelling mistakes in the man page (Addresses Debian
 		Bug: #323538)
 
