@@ -1,5 +1,8 @@
 2006-01-15  Theodore Ts'o  <tytso@mit.edu>
 
+	* pwgen.1: Fix spelling mistakes in the man page (Addresses Debian
+		Bug: #323538)
+
 	* pwgen.c (main): Fix bug which would cause pwgen to loop forever
 		if the password length specified is 1.
 

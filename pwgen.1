@@ -31,7 +31,7 @@ The
 .B pwgen
 program is designed
 to be used both interactively, and in shell scripts.  Hence, 
-its default behaviour is differs depending on whether the standard output
+its default behavior is differs depending on whether the standard output
 is a tty device or a pipe to another program.  Used interactively, 
 .B pwgen 
 will display a screenful of passwords, allowing the user to pick a single 
@@ -46,7 +46,7 @@ compatible with previous versions of this program.  In addition, for
 backwards compatibility reasons,
 .B pwgen
 will not use upper case letters or numbers by default in this mode,
-although this can be overriden using the 
+although this can be overridden using the 
 .B \-n 
 and 
 .B \-c
@@ -70,7 +70,7 @@ backwards compatibility.
 .B \-B, --ambiguous
 Don't use characters that could be confused by the user when printed,
 such as 'l' and '1', or '0' or 'O'.  This reduces the number of possible 
-passwords signficantly, and as such reduces the quality of the
+passwords significantly, and as such reduces the quality of the
 passwords.  It may be useful for users who have bad vision, but in
 general use of this option is not recommended.
 .TP
@@ -96,7 +96,7 @@ if the standard output is a tty device.
 Will use the sha1's hash of given file and the optional seed to create  
 password. It will allow you to compute the same password later, 
 if you remember the file, seed, and pwgen's options used.
-ie: pwgen -H ~/your_favourite.mp3#your@email.com gives 
+ie: pwgen -H ~/your_favorite.mp3#your@email.com gives 
 a list of possibles passwords for your pop3 account, and you can
 ask this list again and again.
 .IP
