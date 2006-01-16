@@ -28,6 +28,7 @@ install: build
 	dh_installdirs
 
 	$(MAKE) install DESTDIR=`pwd`/debian/pwgen
+	dh_install -ppwgen-udeb pwgen /usr/bin
 
 binary-indep: build install
 	dh_testdir

@@ -1,3 +1,10 @@
+pwgen (2.04-2) unstable; urgency=low
+
+  * Add a udeb for debian-installer.  Thanks to Martin Michlmayr for the
+    patch.  (Closes: #271115)
+
+ -- Theodore Y. Ts'o <tytso@mit.edu>  Sun, 15 Jan 2006 22:31:01 -0500
+
 pwgen (2.04-1) unstable; urgency=low
 
   * New upstream version.

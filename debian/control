@@ -15,3 +15,17 @@ Description: Automatic Password generation
  Uppercase letters and digits are placed in a way that eases
  remembering their position when memorizing only the word.
 
+Package: pwgen-udeb
+Architecture: any
+Depends: ${shlibs:Depends}
+Section: debian-installer
+XC-Package-Type: udeb
+Description: Automatic Password generation
+ pwgen generates random, meaningless but pronounceable passwords.
+ These passwords contain either only lowercase letters, or upper
+ and lower case mixed, or digits thrown in.
+ Uppercase letters and digits are placed in a way that eases
+ remembering their position when memorizing only the word.
+ .
+ pwgen-udeb is a minimal package used by debian-installer.
+
