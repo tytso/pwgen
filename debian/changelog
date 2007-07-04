@@ -1,3 +1,15 @@
+pwgen (2.06-1) unstable; urgency=low
+
+  * New upstream version
+  * Fix pwgen -Bs so that this option combination works correctly
+    (Closes: #368010)
+  * Fix the pwgen -Bc option combination (Closes: #355153)
+  * Fix typo in pwgen man page (Closes: #376147)
+  * Make the -s option imply the -nc options (Closes: #427969)
+  * Add -v option to generate passwords without vowels (Closes: #387461)
+
+ -- Theodore Y. Ts'o <tytso@mit.edu>  Wed,  4 Jul 2007 19:19:26 -0400
+
 pwgen (2.05-1) unstable; urgency=low
 
   * Add a udeb for debian-installer.  Thanks to Martin Michlmayr for the
