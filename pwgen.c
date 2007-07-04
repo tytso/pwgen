@@ -41,11 +41,12 @@ struct option pwgen_options[] = {
 	{ "no-capitalize", no_argument, 0, 'A' },
 	{ "sha1", required_argument, 0, 'H' },
 	{ "ambiguous", no_argument, 0, 'B' },
+	{ "no-vowels", no_argument, 0, 'v' },
 	{ 0, 0, 0, 0}
 };
 #endif
 
-const char *pw_options = "01AaBCcnN:shH:y";
+const char *pw_options = "01AaBCcnN:shH:vy";
 
 static void usage(void)
 {
@@ -77,6 +78,9 @@ static void usage(void)
 	      stderr);
 	fputs("  -C\n\tPrint the generated passwords in columns\n", stderr);
 	fputs("  -1\n\tDon't print the generated passwords in columns\n", 
+	      stderr);
+	fputs("  -v or --no-vowels\n", stderr);
+	fputs("\tDo not use any vowels so as to avoid accidental nasty words\n",
 	      stderr);
 	exit(1);
 }
@@ -148,6 +152,10 @@ int main(int argc, char **argv)
 			break;
 		case 'y':
 			pwgen_flags |= PW_SYMBOLS;
+			break;
+		case 'v':
+			pwgen = pw_rand;
+			pwgen_flags |= PW_NO_VOWELS | PW_DIGITS | PW_UPPERS;
 			break;
 		case 'h':
 		case '?':

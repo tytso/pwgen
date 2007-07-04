@@ -127,6 +127,12 @@ only be used for machine passwords, since otherwise it's almost
 guaranteed that users will simply write the password on a piece of 
 paper taped to the monitor...
 .TP
+.B \-v, --no-vowels
+Generate random passwords that do not contain vowels or numbers that
+might be mistaken for vowels.  It provides less secure passwords to
+allow system administrators to not have to worry with random passwords
+accidentally contain offensive substrings.
+.TP
 .B \-y, --symbols
 Include at least one special character in the password. 
 .SH AUTHOR

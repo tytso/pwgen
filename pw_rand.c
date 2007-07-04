@@ -18,6 +18,7 @@ const char *pw_uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const char *pw_lowers = "abcdefghijklmnopqrstuvwxyz";
 const char *pw_symbols = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 const char *pw_ambiguous = "B8G6I1l0OQDS5Z2";
+const char *pw_vowels = "01aeiouyAEIOUY";
 
 void pw_rand(char *buf, int size, int pw_flags)
 {
@@ -60,11 +61,10 @@ try_again:
 	i = 0;
 	while (i < size) {
 		ch = chars[pw_number(len)];
-		if (pw_flags & PW_AMBIGUOUS) {
-			if (strchr(pw_ambiguous,ch)) {
-				continue;
-			}
-		}
+		if ((pw_flags & PW_AMBIGUOUS) && strchr(pw_ambiguous,ch))
+			continue;
+		if ((pw_flags & PW_NO_VOWELS) && strchr(pw_vowels, ch))
+			continue;
 		buf[i++] = ch;
 		if (strchr(pw_digits, ch))
 			feature_flags &= ~PW_DIGITS;
