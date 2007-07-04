@@ -57,14 +57,15 @@ void pw_rand(char *buf, int size, int pw_flags)
 try_again:
 	len = strlen(chars);
 	feature_flags = pw_flags;
-	for (i = 0; i < size; i++) {
+	i = 0;
+	while (i < size) {
 		ch = chars[pw_number(len)];
 		if (pw_flags & PW_AMBIGUOUS) {
 			if (strchr(pw_ambiguous,ch)) {
 				continue;
 			}
 		}
-		buf[i] = ch;
+		buf[i++] = ch;
 		if (strchr(pw_digits, ch))
 			feature_flags &= ~PW_DIGITS;
 		if (strchr(pw_uppers, ch))
