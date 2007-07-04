@@ -16,7 +16,7 @@ clean:
 	dh_testroot
 	rm -f build-stamp
 
-	-$(MAKE) distclean
+	if test -f Makefile ; then $(MAKE) distclean ; fi
 	-rm -f `find . -name "*~"` pwgen *.o
 
 	dh_clean
