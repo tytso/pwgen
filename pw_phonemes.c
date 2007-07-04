@@ -90,6 +90,14 @@ try_again:
 		/* Don't allow us to overflow the buffer */
 		if (len > size-c)
 			continue;
+
+		/* Handle the AMBIGUOUS flag */
+		if (pw_flags & PW_AMBIGUOUS) {
+			cp = strpbrk(str, pw_ambiguous);
+			if (cp)
+				continue;
+		}
+
 		/*
 		 * OK, we found an element which matches our criteria,
 		 * let's do it!
@@ -106,15 +114,6 @@ try_again:
 		}
 		
 		c += len;
-		
-		/* Handle the AMBIGUOUS flag */
-		if (pw_flags & PW_AMBIGUOUS) {
-			cp = strpbrk(buf, pw_ambiguous);
-			if (cp) {
-				*cp = 0;
-				c = strlen(buf);
-			}
-		}
 		
 		/* Time to stop? */
 		if (c >= size)
