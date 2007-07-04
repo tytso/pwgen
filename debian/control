@@ -3,7 +3,7 @@ Section: admin
 Priority: optional
 Build-Depends: debhelper (>= 4)
 Maintainer: Theodore Y. Ts'o <tytso@mit.edu>
-Standards-Version: 3.6.1.1
+Standards-Version: 3.7.2.2
 
 Package: pwgen
 Architecture: any
