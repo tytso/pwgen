@@ -36,21 +36,33 @@ is a tty device or a pipe to another program.  Used interactively,
 .B pwgen 
 will display a screenful of passwords, allowing the user to pick a single 
 password, and then quickly erase the screen.  This prevents someone from
-being able to "shoulder-surf" the user's chosen password.
+being able to "shoulder surf" the user's chosen password.
 .PP
-When standard output is not a tty, 
+When standard output (stdout) is not a tty, 
 .B pwgen
 will only generate one password, as this tends to be much more convenient
 for shell scripts, and in order to be 
-compatible with previous versions of this program.  In addition, for
-backwards compatibility reasons,
+compatible with previous versions of this program.
+.PP
+In addition, for
+backwards compatibility reasons, when stdout is not a tty and secure
+password generation mode has not been requested,
 .B pwgen
-will not use upper case letters or numbers by default in this mode,
-although this can be overridden using the 
-.B \-n 
-and 
-.B \-c
-options.
+will generate less secure passwords, as
+if the
+.B \-0A
+options had been passed to it on the command line.  This can be
+overriden using the
+.B \-nc
+options.  In the future, the behavior when stdout is a tty may change, so 
+shell scripts using
+.B pwgen
+should explicitly specify the
+.B \-nc
+or
+.B \-0A
+options.  The latter is not recommended for security reasons, since 
+such passwords are far too easy to guess.
 .B
 .SH OPTIONS
 .TP
