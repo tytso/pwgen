@@ -96,10 +96,9 @@ int main(int argc, char **argv)
 
 	pwgen = pw_phonemes;
 	pw_number = pw_random_number;
-	if (isatty(1)) {
+	if (isatty(1))
 		do_columns = 1;
-		pwgen_flags |= PW_DIGITS | PW_UPPERS;
-	}
+	pwgen_flags |= PW_DIGITS | PW_UPPERS;
 
 	while (1) {
 #ifdef HAVE_GETOPT_LONG

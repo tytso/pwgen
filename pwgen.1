@@ -43,26 +43,6 @@ When standard output (stdout) is not a tty,
 will only generate one password, as this tends to be much more convenient
 for shell scripts, and in order to be 
 compatible with previous versions of this program.
-.PP
-In addition, for
-backwards compatibility reasons, when stdout is not a tty and secure
-password generation mode has not been requested,
-.B pwgen
-will generate less secure passwords, as
-if the
-.B \-0A
-options had been passed to it on the command line.  This can be
-overriden using the
-.B \-nc
-options.  In the future, the behavior when stdout is a tty may change, so 
-shell scripts using
-.B pwgen
-should explicitly specify the
-.B \-nc
-or
-.B \-0A
-options.  The latter is not recommended for security reasons, since 
-such passwords are far too easy to guess.
 .B
 .SH OPTIONS
 .TP
