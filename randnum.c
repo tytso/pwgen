@@ -47,11 +47,12 @@ int pw_random_number(max_num)
 	int max_num;
 {
 	int i, fd = get_random_fd();
-	int lose_counter = 0, nbytes=4;
+	int lose_counter = 0, nbytes;
 	unsigned int rand_num;
 	char *cp = (char *) &rand_num;
 
 	if (fd >= 0) {
+		nbytes = sizeof(rand_num);
 		while (nbytes > 0) {
 			i = read(fd, cp, nbytes);
 			if ((i < 0) &&
