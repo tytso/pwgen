@@ -91,13 +91,6 @@ try_again:
 		if (len > size-c)
 			continue;
 
-		/* Handle the AMBIGUOUS flag */
-		if (pw_flags & PW_AMBIGUOUS) {
-			cp = strpbrk(str, pw_ambiguous);
-			if (cp)
-				continue;
-		}
-
 		/*
 		 * OK, we found an element which matches our criteria,
 		 * let's do it!
@@ -111,6 +104,14 @@ try_again:
 				buf[c] = toupper(buf[c]);
 				feature_flags &= ~PW_UPPERS;
 			}
+		}
+
+		/* Handle the AMBIGUOUS flag */
+		if (pw_flags & PW_AMBIGUOUS) {
+			buf[c+len] = '\0'; /* To make strpbrk() happy */
+			cp = strpbrk(buf, pw_ambiguous);
+			if (cp)
+				continue;
 		}
 		
 		c += len;
