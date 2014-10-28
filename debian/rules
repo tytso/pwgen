@@ -9,7 +9,10 @@ LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 
 package=pwgen
 
-build: build-stamp
+build: build-arch build-indep
+build-arch: build-stamp
+build-indep: build-stamp
+
 build-stamp:
 	dh_testdir
 	./configure --prefix=/usr --mandir=/usr/share/man
