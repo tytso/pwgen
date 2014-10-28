@@ -2,13 +2,18 @@
 # Made with the aid of debmake, by Christoph Lameter,
 # based on the sample debian/rules file for GNU hello by Ian Jackson.
 
+CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
+CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
+CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS)
+LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
+
 package=pwgen
 
 build: build-stamp
 build-stamp:
 	dh_testdir
 	./configure --prefix=/usr --mandir=/usr/share/man
-	$(MAKE) CFLAGS="-O2 -g -Wall"
+	$(MAKE) CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)"
 	touch build-stamp
 
 clean:
@@ -24,7 +29,7 @@ clean:
 install: build 
 	dh_testdir
 	dh_testroot
-	dh_clean -k
+	dh_prep
 	dh_installdirs
 
 	$(MAKE) install DESTDIR=`pwd`/debian/pwgen

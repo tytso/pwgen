@@ -1,13 +1,13 @@
 Source: pwgen
 Section: admin
 Priority: optional
-Build-Depends: debhelper (>= 4)
+Build-Depends: debhelper (>= 8)
 Maintainer: Theodore Y. Ts'o <tytso@mit.edu>
-Standards-Version: 3.7.2.2
+Standards-Version: 3.9.6.0
 
 Package: pwgen
 Architecture: any
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Automatic Password generation
  pwgen generates random, meaningless but pronounceable passwords.
  These passwords contain either only lowercase letters, or upper
@@ -17,7 +17,7 @@ Description: Automatic Password generation
 
 Package: pwgen-udeb
 Architecture: any
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Section: debian-installer
 XC-Package-Type: udeb
 Description: Automatic Password generation
