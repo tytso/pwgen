@@ -202,13 +202,12 @@ int main(int argc, char **argv)
 	}
 	for (i=0; i < num_pw; i++) {
 		pwgen(buf, pw_length, pwgen_flags);
-		if (!do_columns || ((i % num_cols) == (num_cols-1)))
+		if (!do_columns || ((i % num_cols) == (num_cols-1)) ||
+		    (i == (num_pw - 1)))
 			printf("%s\n", buf);
 		else
 			printf("%s ", buf);
 	}
-	if ((num_cols > 1) && ((i % num_cols) != 0))
-		fputc('\n', stdout);
 	free(buf);
 	return 0;
 }
