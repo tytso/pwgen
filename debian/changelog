@@ -1,3 +1,12 @@
+pwgen (2.07-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Add multiarch metadata (Closes: #693964)
+  * Fix manpage typo (Closes: #579178)
+  * Stop -s from overwriting other flags (Closes: 436912)
+
+ -- Wookey <wookey@debian.org>  Thu, 22 Oct 2015 22:14:04 +0100
+
 pwgen (2.07-1) unstable; urgency=high
 
   * New upstream version
