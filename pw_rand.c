@@ -57,7 +57,7 @@ void pw_rand(char *buf, int size, int pw_flags)
 	}
 try_again:
 	len = strlen(chars);
-	feature_flags = pw_flags;
+	feature_flags = (size > 2) ? pw_flags : 0;
 	i = 0;
 	while (i < size) {
 		ch = chars[pw_number(len)];

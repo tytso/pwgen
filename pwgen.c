@@ -166,10 +166,12 @@ int main(int argc, char **argv)
 		pw_length = strtol(argv[optind], &tmp, 0);
 		if (pw_length < 5)
 			pwgen = pw_rand;
-		if (pw_length <= 2)
-			pwgen_flags &= ~PW_UPPERS;
-		if (pw_length <= 1)
-			pwgen_flags &= ~PW_DIGITS;
+		if (pwgen != pw_rand) {
+			if (pw_length <= 2)
+				pwgen_flags &= ~PW_UPPERS;
+			if (pw_length <= 1)
+				pwgen_flags &= ~PW_DIGITS;
+		}
 		if (*tmp) {
 			fprintf(stderr, "Invalid password length: %s\n",
 				argv[optind]);
