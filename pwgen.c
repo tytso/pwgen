@@ -137,7 +137,6 @@ int main(int argc, char **argv)
 			break;
 		case 's':
 			pwgen = pw_rand;
-			pwgen_flags |= PW_DIGITS | PW_UPPERS;
 			break;
 		case 'C':
 			do_columns = 1;
@@ -154,7 +153,7 @@ int main(int argc, char **argv)
 			break;
 		case 'v':
 			pwgen = pw_rand;
-			pwgen_flags |= PW_NO_VOWELS | PW_DIGITS | PW_UPPERS;
+			pwgen_flags |= PW_NO_VOWELS;
 			break;
 		case 'h':
 		case '?':
