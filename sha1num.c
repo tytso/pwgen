@@ -54,6 +54,8 @@ void pw_sha1_init(char *sha1)
 		sha1_update( &sha1_ctx, buf, i );
 	}
 
+	fclose(f);
+
 	return;
 }
 
