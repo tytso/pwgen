@@ -87,7 +87,7 @@ $(top_builddir)/config.status: $(top_srcdir)/configure
 Makefile: $(srcdir)/Makefile.in $(DEP_MAKEFILE) $(top_builddir)/config.status
 	cd $(top_builddir); CONFIG_FILES=$(my_dir)/Makefile ./config.status
 
-$(top_srcdir)/configure: $(top_srcdir)/configure.in
+$(top_srcdir)/configure: $(top_srcdir)/configure.ac
 	cd $(top_srcdir) && autoconf
 
 #
