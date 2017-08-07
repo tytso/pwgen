@@ -1,7 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: pwgen
 Upstream-Contact: tytso@mit.edu
-Source: http://sourceforge.net/projects/pwgen/files/pwgen/
+Source: https://github.com/tytso/pwgen
 
 Files: *
 Copyright: 2001, 2002, 2005, 2006, 2014 Theodore Ts'o <tytso@mit.edu>
