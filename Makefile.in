@@ -76,6 +76,7 @@ $(srcdir)/.exclude-file:
 		-o -name TAGS -o -name \*.old -o -name \*.gmo \
 		-o -name config.log -o -name config.cache \
 		-o -name config.status -o -name Makefile \
+		-o -name build -o -name autom4te.cache \
 		-o -name changed-files -o -name .#\* \) \
 		-print) | sed -e "s/^./$$a/" > $(srcdir)/.exclude-file
 	echo "$(SRCROOT)/.exclude-file" >> $(srcdir)/.exclude-file
