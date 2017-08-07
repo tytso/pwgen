@@ -101,6 +101,11 @@ Also, note that the name of the file may be easily available from the
 .B \-h, --help
 Print a help message.
 .TP
+.B \-r \fIchars\fR, \fB--remove-chars=\fIchars
+Don't use the specified characters in password.  This option will
+disable the phomeme-based generator and uses the random password
+generator.
+.TP
 .B \-s, --secure
 Generate completely random, hard-to-memorize passwords.  These should
 only be used for machine passwords, since otherwise it's almost
