@@ -32,9 +32,19 @@ all:: pwgen
 .c.o:
 	$(CC) -c $(ALL_CFLAGS) $< -o $@
 
-OBJS= pwgen.o pw_phonemes.o pw_rand.o randnum.o sha1.o sha1num.o
+OBJS=	pwgen.o \
+	pw_phonemes.o \
+	pw_rand.o \
+	randnum.o \
+	sha1.o \
+	sha1num.o
 
-SRCS= pwgen.c pw_phonemes.c pw_rand.c randnum.c sha1.c sha1num.c
+SRCS=	$(srcdir)/pwgen.c \
+	$(srcdir)/pw_phonemes.c \
+	$(srcdir)/pw_rand.c \
+	$(srcdir)/randnum.c \
+	$(srcdir)/sha1.c \
+	$(srcdir)/sha1num.c
 
 
 pwgen: $(OBJS)
@@ -123,9 +133,9 @@ depend:: .depend
 # Makefile dependencies follow.  This must be the last section in
 # the Makefile.in file
 #
-pwgen.o: pwgen.c pwgen.h
-pw_phonemes.o: pw_phonemes.c pwgen.h
-pw_rand.o: pw_rand.c pwgen.h
-randnum.o: randnum.c pwgen.h
-sha1.o: sha1.c sha1.h 
-sha1num.o: sha1num.c sha1.h pwgen.h
+pwgen.o: $(srcdir)/pwgen.c $(srcdir)/pwgen.h
+pw_phonemes.o: $(srcdir)/pw_phonemes.c $(srcdir)/pwgen.h
+pw_rand.o: $(srcdir)/pw_rand.c $(srcdir)/pwgen.h
+randnum.o: $(srcdir)/randnum.c $(srcdir)/pwgen.h
+sha1.o: $(srcdir)/sha1.c $(srcdir)/sha1.h
+sha1num.o: $(srcdir)/sha1num.c $(srcdir)/pwgen.h $(srcdir)/sha1.h
