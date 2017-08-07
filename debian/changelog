@@ -1,9 +1,26 @@
+pwgen (2.08-1) unstable; urgency=medium
+
+  * New upstream version
+  * Suppress trailing space after the last password (Closes: #794635)
+  * Make pwgen -s more "secure" for 1 and 2 character passwords
+    (Closes: #666725)
+  * Fix option parsing of "pwgen --no-capitalize --no-vowels" (Closes: #791908)
+  * Add new option --remove-chars which removes chars from the set of
+    characters used to generate passwords (Closes: #836334)
+  * Add cross-compilation to debian/rules (Closes: #695148)
+  * Update control and copyright files to point at pwgen at github for
+    the home directory and primary git repository
+    (Closes: #454500, #855495, #846517)
+  * Update Debian policy compliance to 4.0.0
+
+ -- Theodore Y. Ts'o <tytso@mit.edu>  Mon, 07 Aug 2017 00:51:45 -0400
+
 pwgen (2.07-1.1) unstable; urgency=medium
 
   * Non-maintainer upload.
   * Add multiarch metadata (Closes: #693964)
   * Fix manpage typo (Closes: #579178)
-  * Stop -s from overwriting other flags (Closes: 436912)
+  * Stop -s from overwriting other flags (Closes: #436912)
 
  -- Wookey <wookey@debian.org>  Thu, 22 Oct 2015 22:14:04 +0100
 
