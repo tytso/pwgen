@@ -1,9 +1,9 @@
 Source: pwgen
 Section: admin
 Priority: optional
-Build-Depends: debhelper (>= 8)
+Build-Depends: debhelper (>= 10)
 Maintainer: Theodore Y. Ts'o <tytso@mit.edu>
-Standards-Version: 3.9.6.0
+Standards-Version: 4.0.0
 
 Package: pwgen
 Architecture: any
