@@ -1,0 +1,9 @@
+Makefile
+config.cache
+config.log
+config.status
+configure
+pwgen
+build
+autom4te.cache
+*.o

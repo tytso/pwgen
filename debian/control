@@ -1,0 +1,36 @@
+Source: pwgen
+Section: admin
+Priority: optional
+Build-Depends: debhelper (>= 10)
+Maintainer: Theodore Y. Ts'o <tytso@mit.edu>
+Standards-Version: 4.0.0
+Homepage: https://github.com/tytso/pwgen
+Vcs-Browser: https://github.com/tytso/pwgen
+Vcs-Git: https://github.com/tytso/pwgen.git
+
+Package: pwgen
+Architecture: any
+Multi-Arch: foreign
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Automatic Password generation
+ pwgen generates random, meaningless but pronounceable passwords.
+ These passwords contain either only lowercase letters, or upper
+ and lower case mixed, or digits thrown in.
+ Uppercase letters and digits are placed in a way that eases
+ remembering their position when memorizing only the word.
+
+Package: pwgen-udeb
+Architecture: any
+Multi-Arch: foreign
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Section: debian-installer
+XC-Package-Type: udeb
+Description: Automatic Password generation
+ pwgen generates random, meaningless but pronounceable passwords.
+ These passwords contain either only lowercase letters, or upper
+ and lower case mixed, or digits thrown in.
+ Uppercase letters and digits are placed in a way that eases
+ remembering their position when memorizing only the word.
+ .
+ pwgen-udeb is a minimal package used by debian-installer.
+
