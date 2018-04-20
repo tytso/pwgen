@@ -111,7 +111,7 @@ try_again:
 			buf[c+len] = '\0'; /* To make strpbrk() happy */
 			cp = strpbrk(buf, pw_ambiguous);
 			if (cp)
-				continue;
+				goto try_again;
 		}
 		
 		c += len;
