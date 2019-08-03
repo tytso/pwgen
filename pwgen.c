@@ -32,6 +32,7 @@ int	do_columns = 0;
 struct option pwgen_options[] = {
 	{ "alt-phonics", no_argument, 0, 'a' },
 	{ "capitalize", no_argument, 0, 'c' },
+	{ "digital", no_argument, 0, 'd' },
 	{ "numerals", no_argument, 0, 'n'},
 	{ "symbols", no_argument, 0, 'y'},
 	{ "num-passwords", required_argument, 0, 'N'},
@@ -47,7 +48,7 @@ struct option pwgen_options[] = {
 };
 #endif
 
-const char *pw_options = "01AaBCcnN:sr:hH:vy";
+const char *pw_options = "01AaBCcdnN:sr:hH:vy";
 
 static void usage(void)
 {
@@ -56,6 +57,8 @@ static void usage(void)
 	fputs("  -c or --capitalize\n", stderr);
 	fputs("\tInclude at least one capital letter in the password\n", 
 	      stderr);
+	fputs("  -d or --digital\n", stderr);
+	fputs("\tUse only digits to generate password\n", stderr);
 	fputs("  -A or --no-capitalize\n", stderr);
 	fputs("\tDon't include capital letters in the password\n", 
 	      stderr);
@@ -103,7 +106,7 @@ int main(int argc, char **argv)
 	pw_number = pw_random_number;
 	if (isatty(1))
 		do_columns = 1;
-	pwgen_flags |= PW_DIGITS | PW_UPPERS;
+	pwgen_flags |= PW_DIGITS | PW_UPPERS | PW_LOWERS;
 
 	while (1) {
 #ifdef HAVE_GETOPT_LONG
@@ -128,6 +131,10 @@ int main(int argc, char **argv)
 		case 'c':
 			pwgen_flags |= PW_UPPERS;
 			break;
+		case 'd':
+			pwgen = pw_rand;
+			pwgen_flags &= ~PW_UPPERS;
+			pwgen_flags &= ~PW_LOWERS;
 		case 'n':
 			pwgen_flags |= PW_DIGITS;
 			break;
