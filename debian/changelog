@@ -1,3 +1,11 @@
+pwgen (2.08-2) unstable; urgency=medium
+
+  * Convert debian/rules file to use dh
+  * Update the debhelper compatibility level to 12
+  * Update Debian policy compliance to 4.0.0
+
+ -- Theodore Y. Ts'o <tytso@mit.edu>  Sat, 03 Aug 2019 10:27:03 -0400
+
 pwgen (2.08-1) unstable; urgency=medium
 
   * New upstream version

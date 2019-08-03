@@ -1,9 +1,9 @@
 Source: pwgen
 Section: admin
 Priority: optional
-Build-Depends: debhelper (>= 10)
+Build-Depends: debhelper (>= 12)
 Maintainer: Theodore Y. Ts'o <tytso@mit.edu>
-Standards-Version: 4.0.0
+Standards-Version: 4.4.0
 Homepage: https://github.com/tytso/pwgen
 Vcs-Browser: https://github.com/tytso/pwgen
 Vcs-Git: https://github.com/tytso/pwgen.git
