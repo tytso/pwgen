@@ -25,6 +25,7 @@ struct pw_element {
  */
 #define PW_DIGITS	0x0001	/* At least one digit */
 #define PW_UPPERS	0x0002	/* At least one upper letter */
+#define PW_LOWERS	0x0020	/* At least one lower letter */
 #define PW_SYMBOLS	0x0004
 #define PW_AMBIGUOUS	0x0008
 #define PW_NO_VOWELS	0x0010
