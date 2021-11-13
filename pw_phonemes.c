@@ -56,7 +56,7 @@ struct pw_element elements[] = {
 
 #define NUM_ELEMENTS (sizeof(elements) / sizeof (struct pw_element))
 
-void pw_phonemes(char *buf, int size, int pw_flags, char *remove)
+void pw_phonemes(char *buf, int size, int pw_flags, char *add, char *remove)
 {
 	int		c, i, len, flags, feature_flags;
 	int		prev, should_be, first;

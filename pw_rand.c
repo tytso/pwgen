@@ -35,6 +35,24 @@ static void remove_chars(char *buf, const char *remove)
 	}
 }
 
+static void add_chars(char *buf, const char *add)
+{
+	const char *cp;
+	char *end;
+
+	if (!add)
+		return;
+	end = buf + strlen(buf);
+	for (cp = add; *cp; cp++) {
+		char *r = strchr(buf, *cp);
+
+		if (r != NULL) // skip if already there
+			continue;
+		*end++ = *cp;
+		*end = '\0';
+	}
+}
+
 static int find_chars(char *buf, const char *set)
 {
 	const char *cp;
@@ -45,7 +63,7 @@ static int find_chars(char *buf, const char *set)
 	return 0;
 }
 
-void pw_rand(char *buf, int size, int pw_flags, char *remove)
+void pw_rand(char *buf, int size, int pw_flags, char *add, char *remove)
 {
 	char		ch, *chars, *wchars;
 	int		i, len, feature_flags;
@@ -60,6 +78,9 @@ void pw_rand(char *buf, int size, int pw_flags, char *remove)
 	len += strlen(pw_lowers);
 	if (pw_flags & PW_SYMBOLS) {
 		len += strlen(pw_symbols);
+	}
+	if (add) {
+		len += strlen(add);
 	}
         chars = malloc(len+1);
         if (!chars) {
@@ -80,12 +101,13 @@ void pw_rand(char *buf, int size, int pw_flags, char *remove)
 	if (pw_flags & PW_SYMBOLS) {
 		strcpy(wchars, pw_symbols);
 	}
-	if (remove) {
+	if (add || remove) {
 		if (pw_flags & PW_AMBIGUOUS)
 			remove_chars(chars, pw_ambiguous);
 		if (pw_flags & PW_NO_VOWELS)
 			remove_chars(chars, pw_vowels);
 		remove_chars(chars, remove);
+		add_chars(chars, add); // Override preceding removals
 		if ((pw_flags & PW_DIGITS) &&
 		    !find_chars(chars, pw_digits)) {
 			fprintf(stderr,
