@@ -63,6 +63,16 @@ static int find_chars(char *buf, const char *set)
 	return 0;
 }
 
+static int find_all_chars(char *buf, const char *set)
+{
+	const char *cp;
+
+	for (cp = set; *cp; cp++)
+		if (!strchr(buf, *cp))
+			return 0;
+	return 1;
+}
+
 void pw_rand(char *buf, int size, int pw_flags, char *add, char *remove, char *force)
 {
 	char		ch, *chars, *wchars;
@@ -161,7 +171,7 @@ try_again:
 	if (feature_flags & (PW_UPPERS | PW_DIGITS | PW_SYMBOLS))
 		goto try_again;
 	buf[size] = 0;
-	if (force && !strpbrk(buf, force))
+	if (force && !find_all_chars(buf, force))
 		goto try_again;
 	free(chars);
 	return;
