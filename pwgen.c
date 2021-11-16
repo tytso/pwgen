@@ -219,5 +219,6 @@ int main(int argc, char **argv)
 			printf("%s ", buf);
 	}
 	free(buf);
+	free(remove);
 	return 0;
 }
