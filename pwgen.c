@@ -37,6 +37,7 @@ struct option pwgen_options[] = {
 	{ "num-passwords", required_argument, 0, 'N'},
 	{ "add-chars", required_argument, 0, 'j' },
 	{ "remove-chars", required_argument, 0, 'r' },
+	{ "force-chars", required_argument, 0, 'f' },
 	{ "secure", no_argument, 0, 's' },
 	{ "help", no_argument, 0, 'h'},
 	{ "no-numerals", no_argument, 0, '0' },
@@ -48,7 +49,7 @@ struct option pwgen_options[] = {
 };
 #endif
 
-const char *pw_options = "01AaBCcnN:sj:r:hH:vy";
+const char *pw_options = "01AaBCcnN:sj:r:f:hH:vy";
 
 static void usage(void)
 {
@@ -74,6 +75,9 @@ static void usage(void)
 	fputs("  -r <chars> or --remove-chars=<chars>\n", stderr);
 	fputs("\tRemove characters from the set of characters to "
 	      "generate passwords\n", stderr);
+	fputs("  -f <chars> or --force-chars=<chars>\n", stderr);
+	fputs("\tForce the usage of specified characters in generated passwords\n",
+	      stderr);
 	fputs("  -s or --secure\n", stderr);
 	fputs("\tGenerate completely random passwords\n", stderr);
 	fputs("  -B or --ambiguous\n", stderr);
@@ -102,7 +106,8 @@ int main(int argc, char **argv)
 	char	*buf, *tmp;
 	char	*add=NULL;
 	char	*remove=NULL;
-	void	(*pwgen)(char *inbuf, int size, int pw_flags, char *add, char *remove);
+	char	*force=NULL;
+	void	(*pwgen)(char *inbuf, int size, int pw_flags, char *add, char *remove, char *force);
 
 	pwgen = pw_phonemes;
 	pw_number = pw_random_number;
@@ -173,6 +178,10 @@ int main(int argc, char **argv)
 			remove = strdup(optarg);
 			pwgen = pw_rand;
 			break;
+		case 'f':
+			force = strdup(optarg);
+			pwgen = pw_rand;
+			break;
 		case 'h':
 		case '?':
 			usage();
@@ -220,7 +229,7 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 	for (i=0; i < num_pw; i++) {
-		pwgen(buf, pw_length, pwgen_flags, add, remove);
+		pwgen(buf, pw_length, pwgen_flags, add, remove, force);
 		if (!do_columns || ((i % num_cols) == (num_cols-1)) ||
 		    (i == (num_pw - 1)))
 			printf("%s\n", buf);
@@ -230,5 +239,6 @@ int main(int argc, char **argv)
 	free(buf);
 	free(add);
 	free(remove);
+	free(force);
 	return 0;
 }
