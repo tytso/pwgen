@@ -38,10 +38,10 @@ extern const char *pw_ambiguous;
 /* Function prototypes */
 
 /* pw_phonemes.c */
-extern void pw_phonemes(char *buf, int size, int pw_flags, char *remove);
+extern void pw_phonemes(char *buf, int size, int pw_flags, char *add, char *remove, char *force);
 
 /* pw_rand.c */
-extern void pw_rand(char *buf, int size, int pw_flags, char *remove);
+extern void pw_rand(char *buf, int size, int pw_flags, char *add, char *remove, char *force);
 
 /* randnum.c */
 extern int pw_random_number(int max_num);
