@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <crypt.h>
 #ifdef HAVE_GETOPT_H
 #include <getopt.h>
 #endif
@@ -27,6 +28,8 @@ int	pw_length = 8;
 int	num_pw = -1;
 int	pwgen_flags = 0;
 int	do_columns = 0;
+int do_crypts = 0;
+const char *salt_prefix = "$5$";
 
 #ifdef HAVE_GETOPT_LONG
 struct option pwgen_options[] = {
@@ -41,13 +44,14 @@ struct option pwgen_options[] = {
 	{ "no-numerals", no_argument, 0, '0' },
 	{ "no-capitalize", no_argument, 0, 'A' },
 	{ "sha1", required_argument, 0, 'H' },
+	{ "crypt", no_argument, 0, 'e' },
 	{ "ambiguous", no_argument, 0, 'B' },
 	{ "no-vowels", no_argument, 0, 'v' },
 	{ 0, 0, 0, 0}
 };
 #endif
 
-const char *pw_options = "01AaBCcnN:sr:hH:vy";
+const char *pw_options = "01AaBCcnN:sr:hH:evy";
 
 static void usage(void)
 {
@@ -83,6 +87,8 @@ static void usage(void)
 	fputs("  -C\n\tPrint the generated passwords in columns\n", stderr);
 	fputs("  -1\n\tDon't print the generated passwords in columns\n", 
 	      stderr);
+	fputs("  -e\n\tPrint the encrypted crypt after password.\n", stderr);
+	fputs("\tset salt prefix in SALTPREFIX environment ('', $1$, $5$, etc)\n", stderr);
 	fputs("  -v or --no-vowels\n", stderr);
 	fputs("\tDo not use any vowels so as to avoid accidental nasty words\n",
 	      stderr);
@@ -164,6 +170,13 @@ int main(int argc, char **argv)
 			remove = strdup(optarg);
 			pwgen = pw_rand;
 			break;
+		case 'e':
+			do_crypts = 1;
+			char *temp_salt = getenv("SALTPREFIX");
+			if (temp_salt) {
+				salt_prefix=temp_salt;
+			}
+			break;
 		case 'h':
 		case '?':
 			usage();
@@ -213,10 +226,20 @@ int main(int argc, char **argv)
 	for (i=0; i < num_pw; i++) {
 		pwgen(buf, pw_length, pwgen_flags, remove);
 		if (!do_columns || ((i % num_cols) == (num_cols-1)) ||
-		    (i == (num_pw - 1)))
-			printf("%s\n", buf);
-		else
+		    (i == (num_pw - 1))) {
+
+			printf("%s", buf);
+			if (do_crypts) {
+				printf(" %s", crypt(buf, crypt_gensalt(salt_prefix, 0, NULL,0)));
+			}
+			printf("\n");
+		}
+		else {
 			printf("%s ", buf);
+			if (do_crypts) {
+				printf("%s ", crypt(buf, crypt_gensalt(salt_prefix, 0, NULL,0)));
+			}
+		}
 	}
 	free(buf);
 	return 0;

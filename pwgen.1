@@ -74,6 +74,16 @@ if the standard output is a tty device.
 Print the generated passwords in columns.  This is the default if the 
 standard output is a tty device.
 .TP
+.B \-e
+Generate encrypted password strings alongside the cleartext passwords.
+This defaults to sha256 ('$5$').  Use the environment variable
+.I SALTPREFIX
+to define the salt prefix ('', '$1$', '$5$', etc)
+.TP
+.B \-n, --numerals
+Include at least one number in the password.  This is the default
+if the standard output is a tty device.
+.TP
 .B \-N, --num-passwords=\fInum
 Generate 
 .I num
