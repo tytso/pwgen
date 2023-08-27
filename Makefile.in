@@ -19,6 +19,7 @@ CC = @CC@
 DEFS = @DEFS@
 CFLAGS = @CFLAGS@ $(WALL_OPTS)
 CPPFLAGS = @CPPFLAGS@
+XTRA_CFLAGS = -lcrypt
 ALL_CFLAGS = $(CPPFLAGS) $(DEFS) $(USE_WFLAGS) $(CFLAGS) $(XTRA_CFLAGS) 
 LDFLAGS = @LDFLAGS@
 RM = @RM@
@@ -48,7 +49,7 @@ SRCS=	$(srcdir)/pwgen.c \
 
 
 pwgen: $(OBJS)
-	$(CC) $(LDFLAGS) -o pwgen $(OBJS)
+	$(CC) $(LDFLAGS) -o pwgen $(OBJS) $(XTRA_CFLAGS)
 
 install: pwgen pwgen.1
 	mkdir -p $(DESTDIR)$(prefix)/bin $(DESTDIR)$(mandir)/man1
