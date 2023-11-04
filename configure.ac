@@ -1,5 +1,6 @@
-AC_INIT(pwgen.c)
-AC_PREREQ(2.50)
+AC_INIT
+AC_CONFIG_SRCDIR([pwgen.c])
+AC_PREREQ([2.71])
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_PATH_PROG(MV, mv, mv)
@@ -8,4 +9,5 @@ AC_PATH_PROG(SED, sed, sed)
 AC_PATH_PROG(PERL, perl, perl)
 AC_CHECK_FUNCS(getopt_long)
 AC_CHECK_HEADERS(getopt.h)
-AC_OUTPUT(Makefile)
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
