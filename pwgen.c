@@ -23,7 +23,7 @@ int (*pw_number)(int max_num);
 
 /* Program parameters set via getopt */
 
-int	pw_length = 8;
+unsigned int	pw_length = 8;
 int	num_pw = -1;
 int	pwgen_flags = 0;
 int	do_columns = 0;
@@ -180,7 +180,7 @@ int main(int argc, char **argv)
 			if (pw_length <= 1)
 				pwgen_flags &= ~PW_DIGITS;
 		}
-		if (*tmp) {
+		if (*tmp || pw_length+1 == 0) {
 			fprintf(stderr, "Invalid password length: %s\n",
 				argv[optind]);
 			exit(1);
@@ -198,7 +198,9 @@ int main(int argc, char **argv)
 	}
 	
 	if (do_columns) {
-		num_cols = term_width / (pw_length+1);
+		num_cols = 0;
+		if (pw_length+1 != 0)
+			num_cols = term_width / (pw_length+1);
 		if (num_cols == 0)
 			num_cols = 1;
 	}
