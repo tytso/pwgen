@@ -45,10 +45,11 @@ static int find_chars(char *buf, const char *set)
 	return 0;
 }
 
-void pw_rand(char *buf, int size, int pw_flags, char *remove)
+void pw_rand(char *buf, size_t size, int pw_flags, char *remove)
 {
 	char		ch, *chars, *wchars;
-	int		i, len, feature_flags;
+	size_t		i, len;
+	int		feature_flags;
 
 	len = 0;
 	if (pw_flags & PW_DIGITS) {

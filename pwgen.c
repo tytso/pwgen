@@ -180,7 +180,7 @@ int main(int argc, char **argv)
 			if (pw_length <= 1)
 				pwgen_flags &= ~PW_DIGITS;
 		}
-		if (*tmp) {
+		if (*tmp || pw_length+1 == 0) {
 			fprintf(stderr, "Invalid password length: %s\n",
 				argv[optind]);
 			exit(1);

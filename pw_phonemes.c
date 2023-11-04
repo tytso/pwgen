@@ -8,6 +8,7 @@
  */
 
 #include <ctype.h>
+#include <stdio.h>
 #include <string.h>
 #include "pwgen.h"
 
@@ -56,9 +57,10 @@ struct pw_element elements[] = {
 
 #define NUM_ELEMENTS (sizeof(elements) / sizeof (struct pw_element))
 
-void pw_phonemes(char *buf, int size, int pw_flags, char *remove)
+void pw_phonemes(char *buf, size_t size, int pw_flags, char *remove)
 {
-	int		c, i, len, flags, feature_flags;
+	size_t		c, i, len;
+	int		flags, feature_flags;
 	int		prev, should_be, first;
 	const char	*str;
 	char		ch, *cp;
