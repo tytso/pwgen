@@ -20,7 +20,7 @@
 
 static int get_random_fd(void);
 
-static int get_random_fd()
+static int get_random_fd(void)
 {
 	static int	fd = -2;
 
@@ -36,8 +36,7 @@ static int get_random_fd()
  * Generate a random number n, where 0 <= n < max_num, using
  * /dev/urandom if possible.
  */
-int pw_random_number(max_num)
-	int max_num;
+int pw_random_number(int max_num)
 {
 	unsigned int rand_num;
 	int i, fd = get_random_fd();

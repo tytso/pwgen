@@ -42,8 +42,7 @@ void sha1_process(sha1_context *ctx, uint8 data[64]);
     (b)[(i) + 3] = (uint8) ( (n)       );       \
 }
 
-void sha1_starts(ctx)
-	sha1_context *ctx;
+void sha1_starts(sha1_context *ctx)
 {
     ctx->total[0] = 0;
     ctx->total[1] = 0;
@@ -55,9 +54,7 @@ void sha1_starts(ctx)
     ctx->state[4] = 0xC3D2E1F0;
 }
 
-void sha1_process(ctx, data)
-	sha1_context *ctx;
-	uint8 data[64];
+void sha1_process(sha1_context *ctx, uint8 data[64])
 {
     uint32 temp, W[16], A, B, C, D, E;
 
@@ -213,10 +210,7 @@ void sha1_process(ctx, data)
     ctx->state[4] += E;
 }
 
-void sha1_update(ctx, input, length )
-	sha1_context *ctx;
-	uint8 *input;
-	uint32 length;
+void sha1_update(sha1_context *ctx, uint8 *input, uint32 length)
 {
     uint32 left, fill;
 
@@ -263,9 +257,7 @@ static uint8 sha1_padding[64] =
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
-void sha1_finish( ctx, digest )
-	sha1_context *ctx;
-	uint8 digest[20];
+void sha1_finish(sha1_context *ctx, uint8 digest[20] )
 {
     uint32 last, padn;
     uint32 high, low;
