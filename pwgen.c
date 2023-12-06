@@ -23,7 +23,7 @@ int (*pw_number)(int max_num);
 
 /* Program parameters set via getopt */
 
-int	pw_length = 8;
+int	pw_length = 12;
 int	num_pw = -1;
 int	pwgen_flags = 0;
 int	do_columns = 0;
